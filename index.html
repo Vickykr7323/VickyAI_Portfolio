@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Google AI Studio App</title>
+    <script>
+      // Support both getter and setter for window.fetch to prevent TypeErrors in environments
+      // where fetch is defined with only a getter on the Window/Window prototype.
+      (function() {
+        try {
+          var activeFetch = window.fetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return activeFetch;
+            },
+            set: function(val) {
+              activeFetch = val;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {
+          try {
+            var protoFetch = Window.prototype.fetch || window.fetch;
+            Object.defineProperty(Window.prototype, 'fetch', {
+              get: function() {
+                return protoFetch;
+              },
+              set: function(val) {
+                protoFetch = val;
+              },
+              configurable: true,
+              enumerable: true
+            });
+          } catch (err) {
+            console.warn("Could not patch fetch on window or Window.prototype:", err);
+          }
+        }
+
+        // Suppress WebSocket and HMR-related errors and rejections
+        var isWsError = function(errorObj) {
+          if (!errorObj) return false;
+          var msg = String(errorObj.message || errorObj.description || errorObj.reason || errorObj.stack || errorObj).toLowerCase();
+          return msg.indexOf('websocket') !== -1 || 
+                 msg.indexOf('ws://') !== -1 || 
+                 msg.indexOf('wss://') !== -1 || 
+                 msg.indexOf('connection failed') !== -1 || 
+                 msg.indexOf('closed without opened') !== -1;
+        };
+
+        var handleSuppress = function(event) {
+          var error = event.error || event.reason;
+          var message = event.message || '';
+          
+          if (isWsError(error) || isWsError(message) || isWsError(event)) {
+            try {
+              event.preventDefault();
+              event.stopPropagation();
+              if (event.stopImmediatePropagation) {
+                event.stopImmediatePropagation();
+              }
+            } catch (e) {}
+            return true;
+          }
+          return false;
+        };
+
+        window.addEventListener('error', handleSuppress, true);
+        window.addEventListener('unhandledrejection', handleSuppress, true);
+        window.addEventListener('error', handleSuppress);
+        window.addEventListener('unhandledrejection', handleSuppress);
+
+        // Suppress console.error and console.warn calls matching WebSocket/HMR messages
+        var originalConsoleError = console.error;
+        var originalConsoleWarn = console.warn;
+
+        console.error = function() {
+          var args = Array.prototype.slice.call(arguments);
+          var msg = args.map(function(arg) {
+            return String(arg && arg.message ? arg.message : arg);
+          }).join(' ');
+          if (isWsError(msg)) {
+            return;
+          }
+          originalConsoleError.apply(console, arguments);
+        };
+
+        console.warn = function() {
+          var args = Array.prototype.slice.call(arguments);
+          var msg = args.map(function(arg) {
+            return String(arg && arg.message ? arg.message : arg);
+          }).join(' ');
+          if (isWsError(msg)) {
+            return;
+          }
+          originalConsoleWarn.apply(console, arguments);
+        };
+
+        // Intercept WebSocket constructor to gracefully close HMR sockets
+        var OriginalWebSocket = window.WebSocket;
+        if (OriginalWebSocket) {
+          var MockWebSocket = function(url, protocols) {
+            var isViteHMR = 
+              protocols === 'vite-hmr' || 
+              (typeof url === 'string' && (url.indexOf('vite') !== -1 || url.indexOf('hmr') !== -1 || url.indexOf('3000') !== -1));
+            
+            if (isViteHMR) {
+              return {
+                url: url,
+                readyState: 3, // CLOSED
+                bufferedAmount: 0,
+                extensions: "",
+                protocol: "",
+                binaryType: "blob",
+                close: function() {},
+                send: function() {},
+                addEventListener: function() {},
+                removeEventListener: function() {},
+                dispatchEvent: function() { return false; },
+                onopen: null,
+                onclose: null,
+                onerror: null,
+                onmessage: null
+              };
+            }
+            return new OriginalWebSocket(url, protocols);
+          };
+          MockWebSocket.prototype = OriginalWebSocket.prototype;
+          window.WebSocket = MockWebSocket;
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./src/main.tsx"></script>
+  </body>
+</html>
+

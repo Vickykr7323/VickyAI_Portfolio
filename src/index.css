@@ -1,0 +1,599 @@
+@import "tailwindcss";
+
+:root {
+  font-size: 15px; /* Mobile-first: optimal text readability and alignment on smaller screens */
+}
+
+@media (min-width: 640px) {
+  :root {
+    font-size: 16px; /* Tablets */
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    font-size: 17px; /* Laptops */
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    font-size: 18px; /* Desktop screens */
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap');
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-serif: "Playfair Display", Georgia, serif;
+}
+
+/* 3D Glassmorphism Cards & Interactive Depth */
+.depth-card-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease, border-color 0.5s ease;
+}
+
+.depth-card-3d:hover {
+  transform: translateY(-6px) rotateX(1.5deg) rotateY(-0.5deg);
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.12), 
+              0 0 40px -10px rgba(99, 102, 241, 0.12);
+}
+
+.minimal-mode .depth-card-3d:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04), 0 0 1px rgba(0, 0, 0, 0.1);
+  border-color: #737373 !important;
+}
+
+.glass-mode .depth-card-3d:hover {
+  transform: translateY(-8px) rotateX(2deg) rotateY(-1deg);
+  box-shadow: 0 20px 40px rgba(139, 92, 246, 0.25), 
+              0 0 30px rgba(6, 182, 212, 0.2);
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.developer-mode .depth-card-3d:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 229, 255, 0.15);
+  border-color: #00E5FF !important;
+}
+
+.academic-mode .depth-card-3d:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(30, 58, 138, 0.12);
+  border-color: #1E3A8A !important;
+}
+
+/* Interactive 3D layers */
+.depth-layer-1 {
+  transform: translateZ(15px);
+}
+.depth-layer-2 {
+  transform: translateZ(30px);
+}
+
+/* Dynamic analysis background mesh overlay */
+.analysis-grid {
+  background-size: 30px 30px;
+  background-image: linear-gradient(to right, rgba(99, 102, 241, 0.015) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(99, 102, 241, 0.015) 1px, transparent 1px);
+}
+
+.minimal-mode .analysis-grid {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.01) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(0, 0, 0, 0.01) 1px, transparent 1px);
+}
+
+.glass-mode .analysis-grid {
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+
+.developer-mode .analysis-grid {
+  background-image: linear-gradient(to right, rgba(0, 229, 255, 0.02) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(0, 229, 255, 0.02) 1px, transparent 1px);
+}
+
+.academic-mode .analysis-grid {
+  background-image: linear-gradient(to right, rgba(30, 58, 138, 0.015) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(30, 58, 138, 0.015) 1px, transparent 1px);
+}
+
+/* Animated 3D spatial ambient background glows */
+.glass-mode::before {
+  content: "";
+  position: fixed;
+  top: 15%;
+  left: 20%;
+  width: 45rem;
+  height: 45rem;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+  z-index: -40;
+  pointer-events: none;
+  filter: blur(100px);
+  animation: float-slow 20s infinite alternate;
+}
+
+.glass-mode::after {
+  content: "";
+  position: fixed;
+  bottom: 10%;
+  right: 15%;
+  width: 50rem;
+  height: 50rem;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 70%);
+  z-index: -40;
+  pointer-events: none;
+  filter: blur(110px);
+  animation: float-slow-reverse 25s infinite alternate;
+}
+
+.developer-mode::before {
+  content: "";
+  position: fixed;
+  top: 25%;
+  right: 10%;
+  width: 40rem;
+  height: 40rem;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.06) 0%, transparent 70%);
+  z-index: -40;
+  pointer-events: none;
+  filter: blur(80px);
+  animation: float-slow 18s infinite alternate;
+}
+
+.academic-mode::before {
+  content: "";
+  position: fixed;
+  top: 10%;
+  left: 10%;
+  width: 45rem;
+  height: 45rem;
+  background: radial-gradient(circle, rgba(30, 58, 138, 0.04) 0%, transparent 70%);
+  z-index: -40;
+  pointer-events: none;
+  filter: blur(80px);
+  animation: float-slow 22s infinite alternate;
+}
+
+.minimal-mode::before {
+  content: "";
+  position: fixed;
+  bottom: 5%;
+  left: 15%;
+  width: 35rem;
+  height: 35rem;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.015) 0%, transparent 70%);
+  z-index: -40;
+  pointer-events: none;
+  filter: blur(60px);
+  animation: float-slow 24s infinite alternate;
+}
+
+@keyframes float-slow {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(40px, -60px) scale(1.1);
+  }
+}
+
+@keyframes float-slow-reverse {
+  0% {
+    transform: translate(0, 0) scale(1.1);
+  }
+  100% {
+    transform: translate(-50px, 40px) scale(0.95);
+  }
+}
+
+@keyframes ripple-effect {
+  0% {
+    transform: scale(0);
+    opacity: 0.35;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  animation: ripple-effect 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+/* True 3D Flashcard styles */
+.perspective-1000 {
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+.transform-style-3d {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden !important;
+  -webkit-backface-visibility: hidden !important;
+}
+.rotate-y-0 {
+  transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+}
+
+/* True 3D Text written effects */
+.text-3d-name-glass {
+  color: #ffffff !important;
+  text-shadow: 
+    0 1px 0 #8b5cf6,
+    0 2px 0 #7c3aed,
+    0 3px 0 #6d28d9,
+    0 4px 0 #5b21b6,
+    0 5px 0 #4c1d95,
+    0 6px 1px rgba(0, 0, 0, 0.15),
+    0 0 15px rgba(139, 92, 246, 0.45),
+    0 1px 3px rgba(0, 0, 0, 0.3),
+    1px 4px 6px rgba(0, 0, 0, 0.4),
+    0 5px 10px rgba(0, 0, 0, 0.3),
+    0 10px 20px rgba(139, 92, 246, 0.25);
+}
+
+.text-3d-name-developer {
+  color: #00e5ff !important;
+  text-shadow: 
+    0 1px 0 #00b8cc,
+    0 2px 0 #008f99,
+    0 3px 0 #006666,
+    0 4px 0 #004d4d,
+    0 5px 0 #003333,
+    0 6px 1px rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(0, 229, 255, 0.6),
+    0 1px 3px rgba(0, 0, 0, 0.3),
+    2px 5px 6px rgba(0, 0, 0, 0.55),
+    0 5px 10px rgba(0, 0, 0, 0.35),
+    0 8px 20px rgba(0, 229, 255, 0.4);
+}
+
+.text-3d-name-academic {
+  color: #5a1010 !important;
+  text-shadow: 
+    0 1px 0 #d4c3a3,
+    0 2px 0 #bfac84,
+    0 3px 0 #a6936d,
+    0 4px 0 #8c7956,
+    0 5px 0 #736040,
+    0 6px 1px rgba(0, 0, 0, 0.15),
+    1px 4px 6px rgba(0, 0, 0, 0.35),
+    0 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+.text-3d-name-minimal {
+  color: #111111 !important;
+  text-shadow: 
+    0 1px 0 #d4d4d4,
+    0 2px 0 #b5b5b5,
+    0 3px 0 #969696,
+    0 4px 0 #787878,
+    0 5px 0 #595959,
+    0 6px 1px rgba(0, 0, 0, 0.1),
+    1px 4px 6px rgba(0, 0, 0, 0.15),
+    0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* 3D Interactive Text Lift */
+.text-3d-lift {
+  transform-style: preserve-3d;
+  perspective: 800px;
+  display: inline-block;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), text-shadow 0.4s ease;
+}
+
+.text-3d-lift:hover {
+  transform: translateY(-3px) rotateX(12deg) rotateY(-8deg) translateZ(15px);
+  text-shadow: 
+    0 5px 15px rgba(0, 0, 0, 0.3),
+    0 2px 4px rgba(99, 102, 241, 0.2);
+}
+
+/* 3D Gradient Text styling */
+.gradient-text-3d {
+  background-clip: text;
+  -webkit-background-clip: text;
+  display: inline-block;
+  transform-style: preserve-3d;
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.15), filter 0.35s ease;
+  filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.3));
+}
+
+.gradient-text-3d:hover {
+  transform: translateY(-3px) scale(1.02) rotateX(6deg) rotateY(-3deg) translateZ(8px);
+  filter: drop-shadow(0px 8px 16px rgba(139, 92, 246, 0.45));
+}
+
+/* Float Animation with 3D tilts */
+.float-3d {
+  animation: float-3d-anim 4s infinite ease-in-out;
+}
+
+@keyframes float-3d-anim {
+  0%, 100% {
+    transform: translateY(0) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotateX(3deg) rotateY(-2deg);
+  }
+}
+
+/* ==========================================
+   Tactile 3D Buttons & Interactive Items 
+   ========================================== */
+
+/* All Buttons and custom 3D triggers get physical 3D-tilt hover offsets */
+button,
+.btn-3d-interactive,
+a.interactive-btn-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 500px;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.25), box-shadow 0.3s ease, background-color 0.2s ease, border-color 0.2s ease !important;
+  will-change: transform, box-shadow;
+}
+
+button:hover,
+.btn-3d-interactive:hover,
+a.interactive-btn-3d:hover {
+  transform: translateY(-4px) rotateX(10deg) rotateY(-5deg) translateZ(12px) !important;
+}
+
+/* Theme-specific tactile button shadow adjustments on hover */
+.glass-mode button:hover,
+.glass-mode .btn-3d-interactive:hover,
+.glass-mode a.interactive-btn-3d:hover {
+  box-shadow: 
+    -2px 2px 0px rgba(139, 92, 246, 0.6),
+    -4px 4px 12px rgba(139, 92, 246, 0.3),
+    0px 12px 24px rgba(0, 0, 0, 0.45) !important;
+}
+
+.developer-mode button:hover,
+.developer-mode .btn-3d-interactive:hover,
+.developer-mode a.interactive-btn-3d:hover {
+  box-shadow: 
+    -3px 3px 0px #00E5FF,
+    -5px 5px 12px rgba(0, 229, 255, 0.25),
+    0px 10px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+.academic-mode button:hover,
+.academic-mode .btn-3d-interactive:hover,
+.academic-mode a.interactive-btn-3d:hover {
+  box-shadow: 
+    -2px 2px 0px #7F1D1D,
+    -4px 4px 8px rgba(92, 45, 17, 0.2),
+    0px 8px 16px rgba(0, 0, 0, 0.15) !important;
+}
+
+.minimal-mode button:hover,
+.minimal-mode .btn-3d-interactive:hover,
+.minimal-mode a.interactive-btn-3d:hover {
+  box-shadow: 
+    -2px 2px 0px #171717,
+    -4px 4px 8px rgba(0, 0, 0, 0.08),
+    0px 8px 16px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* ==========================================
+   Theme-Specific Chunky 3D Offset Cards
+   ========================================== */
+
+/* Overriding depth-card-3d with highly physical offset bevel styles */
+.depth-card-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2), box-shadow 0.4s ease, border-color 0.4s ease;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+  animation: float-3d 6s ease-in-out infinite;
+}
+
+.depth-card-3d:hover {
+  animation-play-state: paused;
+}
+
+/* Stagger animation starting times and rates to make the ambient flow feel natural and asynchronous */
+.depth-card-3d:nth-of-type(even) {
+  animation-delay: -1.5s;
+  animation-duration: 7s;
+}
+.depth-card-3d:nth-of-type(3n) {
+  animation-delay: -3s;
+  animation-duration: 8.5s;
+}
+.depth-card-3d:nth-of-type(3n+1) {
+  animation-delay: -4.5s;
+  animation-duration: 6.5s;
+}
+
+@keyframes float-3d {
+  0% {
+    transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotateX(0.8deg) rotateY(-0.4deg);
+  }
+  100% {
+    transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+  }
+}
+
+/* Custom z-index-10 class */
+.z-index-10 {
+  z-index: 10 !important;
+}
+
+/* On smaller screens, prevent 3D transforms from breaking stacking context with fixed nav bar/dropdowns */
+@media (max-w: 1023px) {
+  .depth-card-3d {
+    transform-style: flat !important;
+    z-index: 10 !important;
+  }
+  
+  /* Disable pointer events on depth-card-3d when mobile menu is active to allow hover and click pass-through */
+  .mobile-nav-open .depth-card-3d {
+    pointer-events: none !important;
+  }
+}
+
+/* 1. Glass Mode - Neon floating glowing 3D cards */
+.glass-mode .depth-card-3d {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 4px 8px rgba(139, 92, 246, 0.08),
+    0 12px 24px rgba(0, 0, 0, 0.4),
+    -3px 3px 0px rgba(139, 92, 246, 0.15);
+}
+
+.glass-mode .depth-card-3d:hover {
+  transform: translateY(-8px) rotateX(var(--tilt-x, 4deg)) rotateY(var(--tilt-y, -2deg)) translateZ(10px) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    -6px 6px 0px rgba(6, 182, 212, 0.25),
+    0 20px 40px rgba(139, 92, 246, 0.35),
+    0 0px 45px rgba(139, 92, 246, 0.2),
+    0 35px 70px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* 2. Developer Mode - Brutalist cyber-metallic 3D tiles */
+.developer-mode .depth-card-3d {
+  border: 2px solid #005f73;
+  box-shadow: 
+    -4px 4px 0px #003a45,
+    0 1px 3px rgba(0, 0, 0, 0.6),
+    0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.developer-mode .depth-card-3d:hover {
+  transform: translateY(-8px) rotateX(var(--tilt-x, 4deg)) rotateY(var(--tilt-y, -2deg)) translateZ(12px) !important;
+  border-color: #00E5FF !important;
+  box-shadow: 
+    -8px 8px 0px #00E5FF,
+    0 2px 4px rgba(0, 0, 0, 0.7),
+    0 0px 30px rgba(0, 229, 255, 0.4),
+    0 16px 32px rgba(0, 0, 0, 0.6),
+    0 30px 60px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* 3. Academic Mode - Historical leather-board bound 3D plates */
+.academic-mode .depth-card-3d {
+  border: 1.5px solid #D4C3A3;
+  box-shadow: 
+    0 1px 2px rgba(92, 45, 17, 0.05),
+    -3px 3px 0px #C5B291,
+    0 6px 16px rgba(92, 45, 17, 0.08),
+    -1px 1px 0px #FAF6EE;
+}
+
+.academic-mode .depth-card-3d:hover {
+  transform: translateY(-7px) rotateX(var(--tilt-x, 3.5deg)) rotateY(var(--tilt-y, -1.8deg)) translateZ(8px) !important;
+  border-color: #7F1D1D !important;
+  box-shadow: 
+    0 2px 4px rgba(92, 45, 17, 0.1),
+    -7px 7px 0px #7F1D1D,
+    -2px 2px 0px #FAF0D9,
+    0 16px 24px rgba(92, 45, 17, 0.18),
+    0 28px 56px rgba(92, 45, 17, 0.12) !important;
+}
+
+/* 4. Minimal Mode - Precise geometric layout tiles */
+.minimal-mode .depth-card-3d {
+  border: 1px solid #E5E5E5;
+  box-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.02),
+    -3px 3px 0px #F0F0F0,
+    0 6px 12px rgba(0, 0, 0, 0.03);
+}
+
+.minimal-mode .depth-card-3d:hover {
+  transform: translateY(-6px) rotateX(var(--tilt-x, 3.5deg)) rotateY(var(--tilt-y, -1.8deg)) translateZ(8px) !important;
+  border-color: #737373 !important;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    -6px 6px 0px #171717,
+    0 12px 24px rgba(0, 0, 0, 0.08),
+    0 24px 48px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Global tighter padding on sections to eliminate unwanted space */
+.section-tight-gap {
+  gap: 1.5rem !important;
+}
+
+/* Custom cinematic transitions for Video Intro */
+@keyframes zoom-in-slow {
+  0% { transform: scale(1.02); }
+  100% { transform: scale(1.15); }
+}
+@keyframes pan-left-right {
+  0% { transform: scale(1.08) translateX(-1.5%); }
+  100% { transform: scale(1.08) translateX(1.5%); }
+}
+@keyframes ken-burns {
+  0% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.1) translateY(-2%); }
+  100% { transform: scale(1) translateY(0); }
+}
+
+.animate-zoom-in-slow {
+  animation: zoom-in-slow 15s ease-out forwards infinite alternate;
+}
+.animate-pan-left-right {
+  animation: pan-left-right 18s ease-in-out forwards infinite alternate;
+}
+.animate-ken-burns {
+  animation: ken-burns 25s ease-in-out forwards infinite;
+}
+
+/* Audio visualizer bar animations */
+@keyframes vis-bar-1 {
+  0%, 100% { height: 15%; }
+  50% { height: 75%; }
+}
+@keyframes vis-bar-2 {
+  0%, 100% { height: 25%; }
+  50% { height: 100%; }
+}
+@keyframes vis-bar-3 {
+  0%, 100% { height: 10%; }
+  50% { height: 60%; }
+}
+@keyframes vis-bar-4 {
+  0%, 100% { height: 20%; }
+  50% { height: 90%; }
+}
+
+.animate-visualizer-bar-1 {
+  animation: vis-bar-1 0.7s ease-in-out infinite alternate;
+}
+.animate-visualizer-bar-2 {
+  animation: vis-bar-2 0.5s ease-in-out infinite alternate-reverse;
+}
+.animate-visualizer-bar-3 {
+  animation: vis-bar-3 0.8s ease-in-out infinite alternate;
+}
+.animate-visualizer-bar-4 {
+  animation: vis-bar-4 0.6s ease-in-out infinite alternate-reverse;
+}
+
+
+

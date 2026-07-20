@@ -1,0 +1,6 @@
+{
+  "name": "Vicky Kumar - Professional Portfolio",
+  "description": "An end-to-end interactive professional portfolio for Vicky Kumar, Assistant Professor of Computer Science & Placement Officer, featuring AI career mentors, mock interview simulators, and interactive CS learning labs.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
