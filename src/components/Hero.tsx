@@ -20,10 +20,9 @@ export default function Hero({ images, currentTheme, onNavigate, onPlayVideoIntr
   const roles = [
     "Assistant Professor (Computer Science)",
     "Full-Stack Software Engineer (MERN)",
-    "Placement Department Officer & Recruiter",
+    "Outcome-Based Education (OBE) Educator",
     "AI Curriculum & Laboratory Innovator",
-    "Academic Research Lead (NLP & ML)",
-    "Career Advisor & Resume Mentor"
+    "Student Project Advisor & Mentor"
   ];
 
   const [roleIdx, setRoleIdx] = useState(0);
@@ -275,17 +274,17 @@ export default function Hero({ images, currentTheme, onNavigate, onPlayVideoIntr
           {/* Call to Action Row */}
           <div className="flex flex-wrap items-center gap-3 mt-2">
             <button
-              id="cta-mock-interview"
+              id="cta-explore-projects"
               onMouseEnter={() => playAudioCue("nav-hover")}
               onClick={(e) => {
                 e.stopPropagation();
                 playAudioCue("nav-click");
-                onNavigate("placement");
+                onNavigate("projects");
               }}
               className={styles.btnPrimary}
             >
-              <Briefcase className="w-4 h-4" />
-              Try Mock Interview
+              <FolderGit2 className="w-4 h-4" />
+              Explore Projects
               <ArrowRight className="w-4 h-4" />
             </button>
 

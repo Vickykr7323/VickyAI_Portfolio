@@ -1,4 +1,5 @@
 import { jsPDF } from "jspdf";
+import { CERTIFICATIONS } from "../data";
 
 export function generatePortfolioPdf() {
   const doc = new jsPDF({
@@ -133,7 +134,7 @@ export function generatePortfolioPdf() {
     "Conducted lectures, tutorials, and hands-on laboratory sessions",
     "Prepared question papers, assignments, and structured evaluation rubrics",
     "Mentored mini and major academic projects",
-    "Guided students for internships and placement preparation",
+    "Guided students for internships and technical project development",
     "Promoted experiential, project-based, and outcome-focused learning"
   ];
   teachingBullets.forEach(bullet => printBullet(bullet));
@@ -269,10 +270,20 @@ export function generatePortfolioPdf() {
   doc.setFont("Helvetica", "normal");
   doc.setFontSize(9.5);
   doc.setTextColor(colors.darkText[0], colors.darkText[1], colors.darkText[2]);
-  doc.text("Python – IIT Bombay        Java – IIT Bombay", marginX, y);
-  y += 4.5;
-  doc.text("MERN Stack – Intellipaat   MEAN Stack – Intellipaat", marginX, y);
-  y += 5.5;
+
+  const certItems = CERTIFICATIONS.map(c => `${c.name} – ${c.provider}`);
+  for (let i = 0; i < certItems.length; i += 2) {
+    checkPageOverflow(4.5);
+    const item1 = certItems[i];
+    const item2 = certItems[i + 1];
+    if (item2) {
+      doc.text(`${item1.padEnd(28, ' ')}   ${item2}`, marginX, y);
+    } else {
+      doc.text(item1, marginX, y);
+    }
+    y += 4.5;
+  }
+  y += 1;
 
   // RESEARCH INTERESTS
   drawSectionHeader("RESEARCH INTERESTS");

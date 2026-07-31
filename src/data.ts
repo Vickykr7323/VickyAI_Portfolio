@@ -35,19 +35,6 @@ export const EXPERIENCES: ExperienceItem[] = [
     ]
   },
   {
-    role: "Placement Department Member",
-    organization: "Gulzar Group of Institutes",
-    period: `Aug ${profStartYear} – Present`,
-    type: "placement",
-    description: "Actively coordinating campus placement drives, technical training camps, and resume workshops to transform students into job-ready software engineering professionals.",
-    highlights: [
-      "Collaborated with diverse industry recruiters and HR leaders to drive on-campus placement opportunities.",
-      "Created and conducted customized technical mock interviews, aptitude training, and problem-solving seminars.",
-      "Organized soft-skills and CV-enrichment workshops helping students land prestigious corporate offers.",
-      "Strengthened industry-academia relationship frameworks, inviting corporate guest lecturers and experts."
-    ]
-  },
-  {
     role: "Freelance Software Engineer & Tech Consultant",
     organization: "Global Remote Clients",
     period: `May ${profStartYear - 3} – Present`,
@@ -107,15 +94,10 @@ export const EDUCATION: EducationItem[] = [
 ];
 
 export const CERTIFICATIONS: Certification[] = [
-  { name: "Python Programming Certification", provider: "IIT Bombay" },
-  { name: "Java Programming Certification", provider: "IIT Bombay" },
-  { name: "Data Structures and Algorithms", provider: "NPTEL (IIT Kharagpur)" },
-  { name: "AWS Certified Solutions Architect – Associate", provider: "Amazon Web Services (AWS)" },
-  { name: "MERN Full-Stack Developer", provider: "Intellipaat" },
-  { name: "MEAN Stack Developer Specialist", provider: "Intellipaat" },
-  { name: "Google Cloud Generative AI Fundamentals", provider: "Google Cloud" },
-  { name: "Advanced Data Science & Machine Learning", provider: "IIT Roorkee (NPTEL)" },
-  { name: "MongoDB Certified Developer Associate", provider: "MongoDB Inc." }
+  { name: "Python Programming", provider: "Spoken Tutorial" },
+  { name: "Java Programming", provider: "Spoken Tutorial" },
+  { name: "MERN Stack", provider: "Intellipaat" },
+  { name: "MEAN Stack", provider: "Intellipaat" }
 ];
 
 export const PROJECTS: Project[] = [
@@ -217,13 +199,13 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "ml-prediction",
-    title: "Machine Learning Recruitment Predictor",
-    subtitle: "Student Placement Analytics Suite",
+    title: "Machine Learning Performance Predictor",
+    subtitle: "Student Academic Analytics Suite",
     tech: ["Python", "Scikit-Learn", "Pandas", "Flask", "Tailwind CSS", "Matplotlib"],
-    description: "A predictive analytics application utilizing historic academic profiles to predict student recruitment success probabilities.",
+    description: "A predictive analytics application utilizing historic academic profiles to predict student course performance and outcome metrics.",
     features: [
       "Trained Logistic Regression, Random Forest, and Support Vector Machine (SVM) models on 1,500+ student historical records.",
-      "Implemented a Flask API processing input grades and coding test scores to estimate placement probabilities with 89% accuracy.",
+      "Implemented a Flask API processing input grades and coding test scores to analyze student performance trends with 89% accuracy.",
       "Renders detailed bento-grid feature analysis charts pointing out critical fields where students should improve."
     ]
   },
@@ -244,7 +226,7 @@ export const PROJECTS: Project[] = [
     title: "Academic Portfolio Website",
     subtitle: "Professional Educator Portfolio",
     tech: ["React", "Vite", "Motion", "Tailwind CSS"],
-    description: "An advanced responsive portfolio system highlighting academic, teaching, and administrative achievements, designed specifically for computer science faculty and placement advisors.",
+    description: "An advanced responsive portfolio system highlighting academic, teaching, and software development achievements.",
     features: [
       "Engineered clean modern UI/UX with smooth state transitions and interactive micro-animations.",
       "Features dynamic theme swapping, downloadable resume layout, and interactive code visualization sandboxes."
@@ -252,109 +234,27 @@ export const PROJECTS: Project[] = [
   }
 ];
 
-
-
 export const RESEARCH_INTERESTS = [
   "Artificial Intelligence (NLP and Generative AI)",
-  "Machine Learning algorithms in Predictive Analytics",
+  "Machine Learning algorithms in Data Analysis",
   "Educational Technology & Outcome-Based Learning Systems",
   "Scalable, Cloud-Native Web Architectures",
-  "Interactive Data Visualizations & Algorithm Analysis",
-  "Hybrid Blockchain-IoT Educational Attainment Frameworks",
-  "Deep Learning in Edge Computing & Biometric Systems"
+  "Interactive Data Visualizations & Algorithm Analysis"
 ];
 
 export const ACADEMIC_STRENGTHS = [
   "Curriculum Planning & Integration",
-  "Academic & Professional Mentorship",
+  "Academic & Technical Mentorship",
   "Classroom Engagement & Management",
-  "Research-Oriented Instruction",
-  "Technical & Cross-Departmental Communication",
-  "Placement Drive Strategies & Interview Coaching",
   "Outcome-Based Education (OBE) Mapping",
-  "Full-Stack Curriculum Designing"
+  "Full-Stack Web Development & Pedagogy"
 ];
 
-export const PUBLICATIONS = [
-  {
-    title: "An Empirical Analysis of Outcome-Based Education (OBE) in Computer Science Instruction using Generative AI Assessment Engines",
-    journal: "International Journal of Educational Technology & Computer Science (IJETCS)",
-    year: `${profStartYear}`,
-    author: "Vicky Kumar"
-  },
-  {
-    title: "A Hybrid Blockchain-IoT Framework for Secure Outcome-Based Academic Credentialing in Higher Education",
-    journal: "IEEE Transactions on Learning Technologies",
-    year: `${profStartYear}`,
-    author: "Vicky Kumar"
-  },
-  {
-    title: "Optimizing Deep Convolutional Neural Networks for Automated Classroom Sentiment Analysis and Dynamic Engagement Mapping",
-    journal: "International Journal of Artificial Intelligence in Education (IJAIED)",
-    year: `${profStartYear}`,
-    author: "Vicky Kumar"
-  }
-];
-
-export const PATENTS = [
-  {
-    title: "An AI-Driven Smart Outcome Assessment System for Academic Progress Mapping",
-    status: "Published",
-    regNo: "IN202511099231",
-    year: `${profStartYear}`
-  },
-  {
-    title: "An Intelligent IoT-Based Classroom Monitoring and Automatic Energy-Saving Attendance Logger",
-    status: "Published",
-    regNo: "IN202511099411",
-    year: `${profStartYear}`
-  },
-  {
-    title: "A Cloud-Computing Based Dynamic Course Outcome and Program Outcome (CO-PO) Mapping System",
-    status: "Published",
-    regNo: "IN202511099105",
-    year: `${profStartYear - 1}`
-  }
-];
-
-export const CONFERENCES = [
-  {
-    title: "Real-time Student Career Fit Analysis and Skill Gap Remediation using Generative Prompt Framing",
-    venue: "IEEE International Conference on Advanced Learning Technologies (ICALT)",
-    year: `${profStartYear}`
-  },
-  {
-    title: "A Lightweight Facial recognition Model for Edge-constrained Classroom Attendance Logging",
-    venue: "ACM India Joint International Conference on Data Science & Management of Data (CODS-COMAD)",
-    year: `${profStartYear - 1}`
-  },
-  {
-    title: "Evaluating the Efficiency of RAG-Based Educational Large Language Models for Academic Tutoring",
-    venue: "International Conference on Artificial Intelligence and Education (ICAIE)",
-    year: `${profStartYear}`
-  },
-  {
-    title: "An Optimized K-Means Clustering Approach for Predicting Student Dropouts in Undergraduate Technical Programs",
-    venue: "IEEE India Council International Conference (INDICON)",
-    year: `${profStartYear}`
-  }
-];
+export const PUBLICATIONS: any[] = [];
+export const PATENTS: any[] = [];
+export const CONFERENCES: any[] = [];
 
 export const WORKSHOPS_FDPS = [
-  {
-    name: "AI & Machine Learning Paradigms in Modern Computer Science Curriculum",
-    type: "FDP",
-    duration: "1 Week",
-    organizer: "IIT Kanpur",
-    year: `${profStartYear}`
-  },
-  {
-    name: "Modern Pedagogies in Outcome-Based Education (OBE) and NBA Accreditation Procedures",
-    type: "FDP Attended",
-    duration: "1 Week",
-    organizer: "NPTEL-IIT Madras",
-    year: `${profStartYear}`
-  },
   {
     name: "Full-Stack Web Development Engineering with React & Node.js Restful Pipelines",
     type: "Workshop Conducted",
@@ -366,7 +266,7 @@ export const WORKSHOPS_FDPS = [
     name: "Empowering Educators in Generative AI Classroom Prompts & Syllabus Orchestration",
     type: "Short Term Course",
     duration: "5 Days",
-    organizer: "NITTTR Chandigarh",
+    organizer: "Technical Institute",
     year: `${profStartYear - 1}`
   },
   {
@@ -388,9 +288,9 @@ export const WORKSHOPS_FDPS = [
 export const TESTIMONIALS: Testimonial[] = [
   {
     name: "Rahul Sharma",
-    role: "Placement Lead",
-    organization: "GGI Placement Cell",
-    text: "Working with Prof. Vicky has been an absolute game changer. His MERN stack coaching and mock interview modules have directly boosted our department's hiring statistics, helping over 150+ students secure core tech placements in the last year alone!"
+    role: "Department Coordinator",
+    organization: "Gulzar Group of Institutes",
+    text: "Working with Prof. Vicky has been an absolute pleasure. His MERN stack coaching and practical lab modules have significantly boosted student programming skills and hands-on project mastery!"
   },
   {
     name: "Dr. Ananya Roy",
@@ -402,13 +302,13 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Karan Johar",
     role: "Software Developer Intern",
     organization: "Tech Mahindra",
-    text: "Thanks to Prof. Vicky's Data Structures syllabus and continuous guidance, I was able to clear the technical coding rounds during campus selection! His resume mentorship and Python programming coaching gave me a massive edge."
+    text: "Thanks to Prof. Vicky's Data Structures syllabus and continuous guidance, I was able to clear complex technical coding rounds! His project mentorship and Python programming coaching gave me a massive edge."
   },
   {
     name: "Sneha Patel",
     role: "Alumna & Full Stack Engineer",
     organization: "Cognizant",
-    text: "His passion for AI and Web Technologies is infectious. The AI Job Portal project we built under his leadership was highly praised during my job interview, showcasing real-world full-stack development skills."
+    text: "His passion for AI and Web Technologies is infectious. The AI Job Portal project we built under his leadership was highly praised during technical interviews, showcasing real-world full-stack development skills."
   },
   {
     name: "Prof. S. K. Nayak",

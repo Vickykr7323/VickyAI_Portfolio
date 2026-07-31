@@ -84,7 +84,7 @@ const DEFAULT_ROADMAP_NODES: RoadmapNode[] = [
     organization: "Independent EdTech Venture",
     status: "completed",
     iconType: "leadership",
-    description: "Started and scaled his own startup business in the education sector, designing and launching automated placement tools, resume optimization platforms, and coding bootcamps.",
+    description: "Started and scaled his own startup business in the education sector, designing and launching automated learning tools, interactive study platforms, and coding bootcamps.",
     milestones: [
       "Co-founded and successfully executed full-stack EdTech operations.",
       "Built interactive platforms for outcome training, serving hundreds of students.",
@@ -96,18 +96,18 @@ const DEFAULT_ROADMAP_NODES: RoadmapNode[] = [
   {
     id: "current-role",
     period: `${currentYear - 1} – Present`,
-    title: "Assistant Professor & Placement Lead",
+    title: "Assistant Professor & CS Department Educator",
     organization: "Gulzar Group of Institutes",
     status: "current",
     iconType: "professor",
-    description: "Delivering modern computer science instruction while executing technical placement drives, aptitude training camps, and interview coaching.",
+    description: "Delivering modern computer science instruction while executing technical workshops, lab sessions, and coding mentorship.",
     milestones: [
-      "Coordinating on-campus placement drives and industry guest-lectures.",
+      "Coordinating technical workshops and industry guest-lectures.",
       "Aligned curriculum with Outcome-Based Education (OBE) rubrics.",
-      "Conducted resume reviews, soft-skills training, and technical mock interviews."
+      "Conducted project guidance, code reviews, and technical workshops."
     ],
-    skills: ["OBE Pedagogy", "Career Mentoring", "Python", "Technical Training", "Academic Administration"],
-    growthFocus: "Unifying educational standards with industry hiring requirements to boost student employment."
+    skills: ["OBE Pedagogy", "Student Mentoring", "Python", "Technical Training", "Academic Administration"],
+    growthFocus: "Unifying educational standards with industry software engineering practices."
   },
   {
     id: "future-phd",
@@ -136,10 +136,10 @@ const DEFAULT_ROADMAP_NODES: RoadmapNode[] = [
     milestones: [
       "Oversee departmental operations and syllabus upgrades matching real-world industry demands.",
       "Foster active research collaborations and secure regional institutional accreditations.",
-      "Direct technical training programs to raise on-campus placement rates."
+      "Direct technical training programs to raise student software engineering standards."
     ],
     skills: ["Academic Leadership", "Syllabus Design", "Strategic Planning", "Faculty Management"],
-    growthFocus: "Elevating departmental academic standards and placement performance."
+    growthFocus: "Elevating departmental academic standards and student research outputs."
   },
   {
     id: "future-leadership",
@@ -148,11 +148,11 @@ const DEFAULT_ROADMAP_NODES: RoadmapNode[] = [
     organization: "Strategic Educational University Enterprise",
     status: "projected",
     iconType: "leadership",
-    description: "Directing strategic institutional placement architectures, enterprise global tech partner frameworks, and curriculum engineering at an executive scale.",
+    description: "Directing strategic institutional academic architectures, educational technology partner frameworks, and curriculum engineering at an executive scale.",
     milestones: [
-      "Establish deep multi-national corporate recruitment alliances with top tech giants.",
+      "Establish deep multi-national academic alliances with top global tech institutions.",
       "Build incubation labs in collaboration with primary software enterprises.",
-      "Oversee comprehensive outcome systems driving 100% campus recruitment rates."
+      "Oversee comprehensive outcome systems driving high student academic success rates."
     ],
     skills: ["Executive Strategy", "Industry Alliances", "Incubation", "Public Speaking", "Organizational Leadership"],
     growthFocus: "Fostering standard-setting academic-corporate ecosystems that produce world-class leaders."

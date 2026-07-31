@@ -51,7 +51,6 @@ export default function Navigation({
     { id: "projects", label: "Projects", icon: FolderGit2 },
     { id: "skills", label: "Skills", icon: Award },
     { id: "notes", label: "CS Notes", icon: Notebook },
-    { id: "placement", label: "Placement Office", icon: UserCheck },
     { id: "contact", label: "Contact", icon: Mail },
   ];
 
@@ -126,12 +125,11 @@ export default function Navigation({
 
   const tooltips: Record<SectionId, string> = {
     home: "Academic Overview & Main Introduction",
-    experience: "Review Teaching, Placement & Dev Experience",
-    academics: "Browse Scholarly Papers, Publications & Credentials",
-    projects: "Explore Engineering Projects & AI Systems",
-    skills: "Inspect Technical Strengths & IIT Certifications",
+    experience: "Review Teaching & Development Experience",
+    academics: "Browse Academic Background, Courses & Credentials",
+    projects: "Explore Engineering Projects & Web Systems",
+    skills: "Inspect Technical Strengths & Core Certifications",
     notes: "Read or Compose CS Syllabus Study Notes",
-    placement: "Access Quiz Kits, Mock Prep & Resume Critique Tools",
     contact: "Send a Direct Inquiry or Message to Vicky Kumar",
   };
 

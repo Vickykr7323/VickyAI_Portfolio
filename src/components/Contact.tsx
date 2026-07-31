@@ -240,8 +240,6 @@ export default function Contact({ currentTheme }: ContactProps) {
     { name: "Instagram", icon: Instagram, url: "https://instagram.com/vickykr802302" },
     { name: "Facebook", icon: Facebook, url: "https://facebook.com/vickykr802302" },
     { name: "YouTube", icon: Youtube, url: "https://youtube.com/@vickykr802302" },
-    { name: "Google Scholar", icon: GraduationCap, url: "https://scholar.google.com" },
-    { name: "ResearchGate", icon: Layers, url: "https://researchgate.net" },
     { name: "LeetCode", icon: Sparkles, url: "https://leetcode.com/vickykr802302" },
     { name: "HackerRank", icon: HelpCircle, url: "https://hackerrank.com/vickykr802302" },
   ];
@@ -250,15 +248,15 @@ export default function Contact({ currentTheme }: ContactProps) {
   const faqs = [
     {
       q: "Are you available for freelance development work?",
-      a: "Yes! Alongside my academic teachings, I am open to consulting or developing web applications, customized outcome-based learning software, or chatbot integrations.",
+      a: "Yes! Alongside my academic teachings, I am open to consulting or developing web applications, customized outcome-based learning software, or AI integrations.",
     },
     {
-      q: "Can I collaborate on research publications?",
-      a: "Absolutely. My research interests include Machine Learning models, educational technology platforms, and highly scalable web engines. Please submit an inquiry detailing your research intent.",
+      q: "Can I collaborate on software projects or curriculum design?",
+      a: "Absolutely. My interests include web technologies, educational tools, and highly scalable software architectures. Please submit an inquiry detailing your proposal.",
     },
     {
-      q: "Do you mentor students for placements and coding?",
-      a: "Yes, mentoring is my passion. As a placement department officer and Assistant Professor at GGI, I run programming bootcamps and review resumes. Use my interactive Placement Office tools on this portfolio!",
+      q: "Do you mentor students in coding and computer science?",
+      a: "Yes, mentoring is my passion. As an Assistant Professor at GGI, I run programming bootcamps, guide projects, and tutor students in Data Structures and Web Development.",
     },
     {
       q: "How quickly do you respond to submitted inquiries?",
@@ -552,10 +550,10 @@ ${autoReply}
       const subjectLower = (formData.subject || "").toLowerCase();
       const messageLower = (formData.message || "").toLowerCase();
       
-      if (subjectLower.includes("placement") || subjectLower.includes("resume") || subjectLower.includes("career") || subjectLower.includes("job") || messageLower.includes("placement")) {
-        autoReply = `Hello ${formData.name},\n\nThank you for reaching out regarding career preparation and placements. As an Assistant Professor and member of GGI's Placement Cell, I am deeply committed to guiding students. I have received your message and will review your career goals. Let's schedule a session to review your resume format or run a mock interview. Feel free to use the interactive Placement Office simulator in the meantime!\n\nBest regards,\nProf. Vicky Kumar`;
-      } else if (subjectLower.includes("project") || subjectLower.includes("mern") || subjectLower.includes("research") || subjectLower.includes("paper") || messageLower.includes("mern")) {
-        autoReply = `Hello ${formData.name},\n\nThank you for reaching out about collaboration and engineering projects. I am highly interested in full-stack technologies (MERN stack), Machine Learning applications, and Outcome-Based Education mapping. I have logged your message and will review your proposal details. I look forward to exploring how we can build or publish this research together.\n\nWarm regards,\nProf. Vicky Kumar`;
+      if (subjectLower.includes("career") || subjectLower.includes("resume") || subjectLower.includes("guidance") || subjectLower.includes("job")) {
+        autoReply = `Hello ${formData.name},\n\nThank you for reaching out regarding student guidance and career advice. As an Assistant Professor at GGI, I am deeply committed to guiding students. I have received your message and will review your inquiry shortly.\n\nBest regards,\nProf. Vicky Kumar`;
+      } else if (subjectLower.includes("project") || subjectLower.includes("mern") || subjectLower.includes("code") || messageLower.includes("mern")) {
+        autoReply = `Hello ${formData.name},\n\nThank you for reaching out about collaboration and engineering projects. I am highly interested in full-stack technologies (MERN stack) and Outcome-Based Education mapping. I have logged your message and will review your proposal details.\n\nWarm regards,\nProf. Vicky Kumar`;
       } else {
         autoReply = `Hello ${formData.name},\n\nThank you for your message. I have received your inquiry regarding "${formData.subject}" and appreciate you getting in touch. I review my portfolio submission log daily and will reply to your email (${formData.email}) with a detailed response within 24 hours. Let's connect soon!\n\nBest wishes,\nProf. Vicky Kumar`;
       }
@@ -1190,7 +1188,7 @@ ${autoReply}
                       onChange={handleInputChange}
                       onBlur={() => handleInputBlur("message", formData.message)}
                       onFocus={() => handleInputFocus("message")}
-                      placeholder="Enter detailed message contents. If seeking coding reviews or placement bootcamps, specify details..."
+                      placeholder="Enter detailed message contents. If seeking coding reviews or project guidance, specify details..."
                       className={`${s.inputClass} resize-none ${
                         touched.message && errors.message 
                           ? "border-rose-500 ring-1 ring-rose-500/20" 
@@ -1573,7 +1571,7 @@ ${autoReply}
                 <span>Newsletter Updates</span>
               </h3>
               <p className="text-[10px] leading-relaxed opacity-75">
-                Subscribe to receive immediate email notices regarding research publications, lecture syllabi, and local placement drives.
+                Subscribe to receive immediate email notices regarding new computer science notes, lecture syllabi, and technical workshops.
               </p>
             </div>
 

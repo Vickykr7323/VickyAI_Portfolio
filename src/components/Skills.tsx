@@ -57,15 +57,15 @@ export default function Skills({ currentTheme }: SkillsProps) {
       skills: [
         { name: "JDBC Database Connectivity", level: 88, status: "Proficient", keywords: ["DriverManager", "PreparedStatements", "Transactions", "ResultSet"] },
         { name: "Database Management Systems", level: 88, status: "Proficient", keywords: ["SQL", "Normalization", "ACID Properties", "Indexing"] },
-        { name: "Technical Mock Interviewing", level: 95, status: "Expert", keywords: ["DSA Coding Prep", "Resume Building", "FAANG Coaching"] },
+        { name: "Technical Mentorship", level: 95, status: "Expert", keywords: ["DSA Coding Prep", "Code Auditing", "CS Pedagogy"] },
         { name: "Git & Version Control", level: 88, status: "Proficient", keywords: ["Gitflow", "Rebase", "Merge Conflicts", "PR Reviews"] },
         { name: "AI/ML Integration (Gemini SDK)", level: 85, status: "Proficient", keywords: ["LLM Orchestration", "Vector Embeddings", "AI Agents"] },
       ],
     },
   ];
 
-  // Professional interview flashcards / QA to show dynamic classroom style
-  const placementFlashcards: { [key: string]: { q: string; a: string }[] } = {
+  // Professional technical Q&A to show dynamic classroom style
+  const technicalFlashcards: { [key: string]: { q: string; a: string }[] } = {
     "Data Structures (DSA)": [
       { q: "What is the primary difference between a Stack and a Queue?", a: "A Stack follows Last-In-First-Out (LIFO) protocol where insertions and deletions happen at the top, whereas a Queue follows First-In-First-Out (FIFO) where insertions happen at the rear and deletions at the front." },
       { q: "Why is a binary search tree (BST) search faster than a simple linked list?", a: "BST search takes O(log N) average time complexity because half of the tree is skipped at each step, whereas linked list search takes linear O(N) since we must traverse nodes sequentially." }
@@ -270,19 +270,19 @@ export default function Skills({ currentTheme }: SkillsProps) {
           <div className={`flex flex-col gap-3.5 ${styles.box}`}>
             <h3 className={`text-sm font-bold uppercase tracking-wider flex items-center gap-1.5 ${styles.textTitle.includes("text-cyan-400") ? "text-cyan-400" : "text-indigo-600"}`}>
               <Lightbulb className="w-5 h-5 text-amber-500 animate-pulse flex-shrink-0" />
-              Recruitment Q&A Flashcard Simulator
+              Technical Q&A Knowledge Simulator
             </h3>
             <p className={`leading-relaxed ${styles.textMuted}`}>
-              Click a primary subject below to simulate a real placement department technical interview question answered by Professor Vicky.
+              Click a primary subject below to review technical questions answered by Professor Vicky.
             </p>
 
             <div className="flex flex-wrap gap-2 my-1">
-              {Object.keys(placementFlashcards).map((subject, idx) => (
+              {Object.keys(technicalFlashcards).map((subject, idx) => (
                 <button
                   key={idx}
                   id={`flashcard-subject-${idx}`}
                   onClick={() => {
-                    const qaList = placementFlashcards[subject];
+                    const qaList = technicalFlashcards[subject];
                     const randomQA = qaList[Math.floor(Math.random() * qaList.length)];
                     setSelectedSkillQA(randomQA);
                   }}
@@ -302,7 +302,7 @@ export default function Skills({ currentTheme }: SkillsProps) {
                 className={styles.flashcardBg}
               >
                 <div>
-                  <span className={`text-[10px] uppercase font-bold tracking-wider block mb-1 ${styles.textTitle.includes("text-cyan-400") ? "text-cyan-400" : "text-indigo-600"}`}>Interview Question</span>
+                  <span className={`text-[10px] uppercase font-bold tracking-wider block mb-1 ${styles.textTitle.includes("text-cyan-400") ? "text-cyan-400" : "text-indigo-600"}`}>Technical Question</span>
                   <p className="font-extrabold leading-snug text-sm sm:text-base">"{selectedSkillQA.q}"</p>
                 </div>
                 <div className="border-t border-gray-200/20 pt-2.5 mt-2">
@@ -321,7 +321,7 @@ export default function Skills({ currentTheme }: SkillsProps) {
                 <Sparkles className={`w-6 h-6 animate-bounce flex-shrink-0 ${
                   currentTheme === "developer" ? "text-cyan-400" : "text-indigo-400"
                 }`} />
-                <span className={`italic font-medium ${styles.textMuted}`}>Select a placement subject to begin technical Q&A drill</span>
+                <span className={`italic font-medium ${styles.textMuted}`}>Select a subject to begin technical Q&A review</span>
               </div>
             )}
           </div>

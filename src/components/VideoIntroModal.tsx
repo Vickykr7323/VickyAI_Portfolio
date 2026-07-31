@@ -35,21 +35,21 @@ const INTRO_SCENES = [
   },
   {
     title: "Scene 2: Academic Heritage",
-    subtitle: "Welcome to Gulzar Group of Institutes, where I lead student mentorship, placement training, and laboratory curriculum designs.",
+    subtitle: "Welcome to Gulzar Group of Institutes, where I lead student mentorship, computer science instruction, and laboratory curriculum designs.",
     imageKey: "campus" as keyof ImageSlots,
     duration: 8000,
     filter: "sepia-10 saturate-110 contrast-105"
   },
   {
     title: "Scene 3: Full-Stack Innovation",
-    subtitle: "I engineer enterprise solutions, holding active patents in computer intelligence, IoT automation, and high-performance server architectures.",
+    subtitle: "I engineer full-stack web applications, specialising in modern JavaScript frameworks, cloud databases, and high-performance software architectures.",
     imageKey: "hero" as keyof ImageSlots,
     duration: 8000,
     filter: "hue-rotate-15 contrast-110"
   },
   {
     title: "Scene 4: Dynamic Student Mentorship",
-    subtitle: "In my personal downtime, I consult with global recruiters, design placement mock interviews, and build tech resources.",
+    subtitle: "In my personal downtime, I mentor aspiring software developers, design interactive CS notes, and build open-source projects.",
     imageKey: "casual" as keyof ImageSlots,
     duration: 8000,
     filter: "saturate-120 brightness-95"

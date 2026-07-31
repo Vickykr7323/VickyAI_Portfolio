@@ -5,22 +5,21 @@ export const PROJECT_GUIDE_SECTIONS = [
   {
     title: "1. Executive System Overview",
     bullets: [
-      "Project Name: Professor Vicky Kumar's Academic Portfolio, Media Vault & Placement Hub",
+      "Project Name: Professor Vicky Kumar's Academic Portfolio & Study Hub",
       "Core Technologies: React (Vite), TypeScript, Tailwind CSS, Motion (framer-motion), jsPDF, Recharts, Lucide Icons",
-      "Goal: A responsive, multi-theme interactive portfolio designed for academics, computer science education, student placement, and CV customization.",
-      "Primary User Personas: Students (searching notes/taking quizzes), HR recruiters (reviewing credentials), and Professor Vicky himself (managing photos/data)."
+      "Goal: A responsive, multi-theme interactive portfolio designed for computer science education, student mentorship, and CV customization.",
+      "Primary User Personas: Students (searching notes/taking quizzes), academic peers (reviewing credentials), and Professor Vicky himself."
     ]
   },
   {
     title: "2. Key Modules & Functional Architecture",
     bullets: [
-      "A. Active Home & Hero: Dynamic welcoming system with custom canvas background animations, word-by-word entry effects, and introductory skip controls.",
-      "B. Professional Timeline: Visual rendering of Professor tenure, Placement advisory roles, Freelance consulting, and MERN engineering history.",
-      "C. Student Placement Office: Simulated campus recruitment cell featuring technical mock quizzes, live scoring meters, and resume optimizer systems.",
-      "D. CS Notes & Curriculum: Digital syllabus hub providing reading guides on Java, Python, DBMS, and DSA with automated word-counts and read-time calculators.",
-      "E. Academics & Scholarly Works: Structured repository of published research patents, peer-reviewed journals, certifications, and conferences.",
-      "F. AI Chatbot Assistant: Contextual assistant powered by Google GenAI to help users instantly fetch syllabus information and guide student placements.",
-      "G. Media Vault & Customizer: Browser-based LocalStorage synchronization engine allowing instant drag-and-drop replacement of all portrait assets."
+      "A. Active Home & Hero: Dynamic welcoming system with custom canvas background animations, word-by-word entry effects, and introductory controls.",
+      "B. Professional Timeline: Visual rendering of Professor tenure, teaching experience, and MERN engineering history.",
+      "C. CS Notes & Curriculum: Digital syllabus hub providing reading guides on Java, Python, DBMS, and DSA with interactive quizzes.",
+      "D. Academic Foundation: Structured repository of academic milestones, certifications, workshops, and educational background.",
+      "E. AI Chatbot Assistant: Contextual assistant powered by Google GenAI to help users instantly fetch syllabus information and study guidance.",
+      "F. Media Vault & Customizer: Browser-based LocalStorage synchronization engine allowing instant drag-and-drop replacement of all portrait assets."
     ]
   },
   {

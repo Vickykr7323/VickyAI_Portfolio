@@ -1,14 +1,14 @@
 import React, { useState, useRef } from "react";
 import { ImageSlots, ThemeId } from "@/types";
-import { EDUCATION, CERTIFICATIONS, ACADEMIC_STRENGTHS, RESEARCH_INTERESTS, PUBLICATIONS, PATENTS, CONFERENCES, WORKSHOPS_FDPS } from "../data";
-import { GraduationCap, Award, BookOpen, Heart, CheckSquare, Sparkles, FileText, FileSpreadsheet, Lightbulb, CalendarDays } from "lucide-react";
+import { EDUCATION, CERTIFICATIONS, ACADEMIC_STRENGTHS, RESEARCH_INTERESTS, WORKSHOPS_FDPS } from "../data";
+import { GraduationCap, Award, BookOpen, Heart, CheckSquare, Sparkles, FileText, CalendarDays } from "lucide-react";
 import { StaggerContainer } from "@/components/StaggeredView";
 import { playAudioCue } from "@/utils/audio";
 
 interface AcademicsProps {
   images: ImageSlots;
   currentTheme: ThemeId;
-  selectedResearchTab?: "journals" | "conferences" | "patents" | "workshops" | null;
+  selectedResearchTab?: "workshops" | null;
   selectedResearchTitle?: string | null;
   onClearSelectedResearch?: () => void;
 }
@@ -21,7 +21,7 @@ export default function Academics({
   onClearSelectedResearch
 }: AcademicsProps) {
   const isPlaceholder = images.campus.startsWith("<svg") || images.campus.startsWith("data:image/svg");
-  const [researchTab, setResearchTab] = useState<"journals" | "conferences" | "patents" | "workshops">("journals");
+  const [researchTab, setResearchTab] = useState<"workshops">("workshops");
 
   React.useEffect(() => {
     if (selectedResearchTab) {
@@ -162,7 +162,7 @@ export default function Academics({
           <div>
             <h3 className={`text-sm font-bold uppercase tracking-wider mb-3 flex items-center gap-1.5 ${styles.textMuted}`}>
               <Award className={`w-4 h-4 ${styles.iconColor}`} />
-              IIT & Industry Certifications
+              Computer Science & Industry Certifications
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {CERTIFICATIONS.map((cert, idx) => (
@@ -186,141 +186,15 @@ export default function Academics({
             </div>
           </div>
 
-          {/* Research, Patents, Conferences & Workshops */}
+          {/* Faculty Development & Workshops */}
           <div className="mt-2">
             <h3 className={`text-sm font-bold uppercase tracking-wider mb-3 flex items-center gap-1.5 ${styles.textMuted}`}>
-              <FileText className={`w-4 h-4 ${styles.iconColor}`} />
-              Research, Patents & Workshops
+              <CalendarDays className={`w-4 h-4 ${styles.iconColor}`} />
+              Faculty Development & Workshops
             </h3>
-            
-            {/* Sub-tab list */}
-            <div className={`flex flex-wrap gap-2 mb-4 pb-2 border-b ${styles.border}`}>
-              <button
-                onClick={(e) => { e.stopPropagation(); playAudioCue("nav-click"); setResearchTab("journals"); }}
-                className={`px-3 py-1 text-xs font-semibold rounded-lg transition-all ${
-                  researchTab === "journals"
-                    ? currentTheme === "developer" ? "bg-cyan-500 text-black font-bold" : currentTheme === "glass" ? "bg-violet-600 text-white shadow-md shadow-violet-500/20" : "bg-neutral-950 text-white font-bold"
-                    : currentTheme === "developer" ? "text-cyan-400 hover:bg-cyan-950/20" : currentTheme === "glass" ? "text-slate-400 hover:text-white hover:bg-white/5" : "text-neutral-500 hover:text-neutral-950"
-                }`}
-              >
-                Journals ({PUBLICATIONS.length})
-              </button>
-              <button
-                onClick={(e) => { e.stopPropagation(); playAudioCue("nav-click"); setResearchTab("conferences"); }}
-                className={`px-3 py-1 text-xs font-semibold rounded-lg transition-all ${
-                  researchTab === "conferences"
-                    ? currentTheme === "developer" ? "bg-cyan-500 text-black font-bold" : currentTheme === "glass" ? "bg-violet-600 text-white shadow-md shadow-violet-500/20" : "bg-neutral-950 text-white font-bold"
-                    : currentTheme === "developer" ? "text-cyan-400 hover:bg-cyan-950/20" : currentTheme === "glass" ? "text-slate-400 hover:text-white hover:bg-white/5" : "text-neutral-500 hover:text-neutral-950"
-                }`}
-              >
-                Conferences ({CONFERENCES.length})
-              </button>
-              <button
-                onClick={(e) => { e.stopPropagation(); playAudioCue("nav-click"); setResearchTab("patents"); }}
-                className={`px-3 py-1 text-xs font-semibold rounded-lg transition-all ${
-                  researchTab === "patents"
-                    ? currentTheme === "developer" ? "bg-cyan-500 text-black font-bold" : currentTheme === "glass" ? "bg-violet-600 text-white shadow-md shadow-violet-500/20" : "bg-neutral-950 text-white font-bold"
-                    : currentTheme === "developer" ? "text-cyan-400 hover:bg-cyan-950/20" : currentTheme === "glass" ? "text-slate-400 hover:text-white hover:bg-white/5" : "text-neutral-500 hover:text-neutral-950"
-                }`}
-              >
-                Patents ({PATENTS.length})
-              </button>
-              <button
-                onClick={(e) => { e.stopPropagation(); playAudioCue("nav-click"); setResearchTab("workshops"); }}
-                className={`px-3 py-1 text-xs font-semibold rounded-lg transition-all ${
-                  researchTab === "workshops"
-                    ? currentTheme === "developer" ? "bg-cyan-500 text-black font-bold" : currentTheme === "glass" ? "bg-violet-600 text-white shadow-md shadow-violet-500/20" : "bg-neutral-950 text-white font-bold"
-                    : currentTheme === "developer" ? "text-cyan-400 hover:bg-cyan-950/20" : currentTheme === "glass" ? "text-slate-400 hover:text-white hover:bg-white/5" : "text-neutral-500 hover:text-neutral-950"
-                }`}
-              >
-                FDPs & Workshops ({WORKSHOPS_FDPS.length})
-              </button>
-            </div>
 
-            {/* List containers */}
-            <div className="space-y-3 animate-in fade-in slide-in-from-bottom-2 duration-300">
-              {researchTab === "journals" && PUBLICATIONS.map((pub, idx) => {
-                const isSelected = selectedResearchTitle === pub.title;
-                return (
-                  <div 
-                    key={idx} 
-                    id={`research-${pub.title.replace(/\s+/g, "-").toLowerCase()}`}
-                    className={`${styles.innerCard} depth-card-3d ${isSelected ? 'ring-2 ring-indigo-500 ring-offset-2 scale-[1.01] shadow-md transition-all duration-300 border-indigo-500' : ''}`}
-                  >
-                    <div className="flex items-start gap-3">
-                      <div className={`p-1.5 rounded-lg flex-shrink-0 mt-0.5 ${currentTheme === "developer" ? "bg-cyan-500/10 text-cyan-400" : "bg-[#FAF0D9] text-[#7F1D1D] flex-shrink-0"}`}>
-                        <FileText className="w-3.5 h-3.5" />
-                      </div>
-                      <div className="flex flex-col">
-                        <span className={`text-xs font-bold leading-snug ${styles.textPrimary}`}>
-                          {pub.title}
-                        </span>
-                        <span className={`text-[10px] font-semibold mt-1 ${currentTheme === "developer" ? "text-cyan-400" : "text-indigo-600"}`}>
-                          {pub.journal} • {pub.year}
-                        </span>
-                        <span className={`text-[9px] mt-0.5 font-medium ${styles.textMuted}`}>
-                          First Author: {pub.author}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-
-              {researchTab === "conferences" && CONFERENCES.map((conf, idx) => {
-                const isSelected = selectedResearchTitle === conf.title;
-                return (
-                  <div 
-                    key={idx} 
-                    id={`research-${conf.title.replace(/\s+/g, "-").toLowerCase()}`}
-                    className={`${styles.innerCard} depth-card-3d ${isSelected ? 'ring-2 ring-indigo-500 ring-offset-2 scale-[1.01] shadow-md transition-all duration-300 border-indigo-500' : ''}`}
-                  >
-                    <div className="flex items-start gap-3">
-                      <div className={`p-1.5 rounded-lg flex-shrink-0 mt-0.5 ${currentTheme === "developer" ? "bg-cyan-500/10 text-cyan-400" : "bg-emerald-50 text-emerald-600 border border-emerald-100"}`}>
-                        <FileSpreadsheet className="w-3.5 h-3.5" />
-                      </div>
-                      <div className="flex flex-col">
-                        <span className={`text-xs font-bold leading-snug ${styles.textPrimary}`}>
-                          {conf.title}
-                        </span>
-                        <span className={`text-[10px] font-semibold mt-1 ${currentTheme === "developer" ? "text-cyan-400" : "text-indigo-600"}`}>
-                          {conf.venue} • {conf.year}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-
-              {researchTab === "patents" && PATENTS.map((pat, idx) => {
-                const isSelected = selectedResearchTitle === pat.title;
-                return (
-                  <div 
-                    key={idx} 
-                    id={`research-${pat.title.replace(/\s+/g, "-").toLowerCase()}`}
-                    className={`${styles.innerCard} depth-card-3d ${isSelected ? 'ring-2 ring-indigo-500 ring-offset-2 scale-[1.01] shadow-md transition-all duration-300 border-indigo-500' : ''}`}
-                  >
-                    <div className="flex items-start gap-3">
-                      <div className={`p-1.5 rounded-lg flex-shrink-0 mt-0.5 ${currentTheme === "developer" ? "bg-cyan-500/10 text-cyan-400" : "bg-amber-50 text-amber-600 border border-amber-100"}`}>
-                        <Lightbulb className="w-3.5 h-3.5" />
-                      </div>
-                      <div className="flex flex-col">
-                        <span className={`text-xs font-bold leading-snug ${styles.textPrimary}`}>
-                          {pat.title}
-                        </span>
-                        <span className={`text-[10px] font-semibold mt-1 ${currentTheme === "developer" ? "text-cyan-400" : "text-indigo-600"}`}>
-                          Registration No: {pat.regNo} ({pat.status})
-                        </span>
-                        <span className={`text-[9px] mt-0.5 font-medium ${styles.textMuted}`}>
-                          Year of Publication: {pat.year}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-
-              {researchTab === "workshops" && WORKSHOPS_FDPS.map((wf, idx) => (
+            <div className="space-y-3">
+              {WORKSHOPS_FDPS.map((wf, idx) => (
                 <div key={idx} className={`${styles.innerCard} depth-card-3d`}>
                   <div className="flex items-start gap-3">
                     <div className={`p-1.5 rounded-lg flex-shrink-0 mt-0.5 ${currentTheme === "developer" ? "bg-cyan-500/10 text-cyan-400" : "bg-violet-50 text-violet-600 border border-violet-100"}`}>

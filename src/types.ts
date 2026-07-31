@@ -7,7 +7,6 @@ export type SectionId =
   | "projects" 
   | "skills"
   | "notes"
-  | "placement"
   | "contact";
 
 export interface Project {
@@ -27,7 +26,7 @@ export interface ExperienceItem {
   period: string;
   description: string;
   highlights: string[];
-  type: "teaching" | "placement" | "internship";
+  type: "teaching" | "internship";
 }
 
 export interface EducationItem {
@@ -74,7 +73,7 @@ export interface Testimonial {
 export interface SearchSelection {
   type: "note" | "project" | "research";
   id?: string;
-  tab?: "journals" | "conferences" | "patents" | "workshops";
+  tab?: "workshops";
   title?: string;
 }
 

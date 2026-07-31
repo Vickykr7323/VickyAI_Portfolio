@@ -13,7 +13,6 @@ import Academics from "./components/Academics";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
 import CSNotes from "./components/CSNotes";
-import PlacementOffice from "./components/PlacementOffice";
 import Background3D from "./components/Background3D";
 import ScrollToTop from "./components/ScrollToTop";
 import Tooltip from "./components/Tooltip";
@@ -74,9 +73,9 @@ export default function App() {
         );
       } else if (progress < 55) {
         setSplashStatus(
-          currentTheme === "developer" ? "sys.load(): Mapping placement intelligence analytics..." :
+          currentTheme === "developer" ? "sys.load(): Loading computer science modules..." :
           currentTheme === "glass" ? "Polishing deep glass gradients..." :
-          currentTheme === "academic" ? "Indexing published journals and patents..." :
+          currentTheme === "academic" ? "Indexing published notes and resources..." :
           "Syncing academic progress indices..."
         );
       } else if (progress < 85) {
@@ -263,8 +262,6 @@ export default function App() {
             onClearSelectedNoteId={() => setSearchSelection(null)}
           />
         );
-      case "placement":
-        return <PlacementOffice currentTheme={currentTheme} />;
       case "contact":
         return <Contact currentTheme={currentTheme} />;
       case "home":
@@ -502,7 +499,7 @@ export default function App() {
                   </div>
                   <h4 className="font-bold text-sm">Message Sent Successfully!</h4>
                   <p className="text-xs text-neutral-400 max-w-xs mx-auto">
-                    Thank you for reaching out. Vicky will respond to your educational or placement inquiry at the email provided.
+                    Thank you for reaching out. Vicky will respond to your educational inquiry at the email provided.
                   </p>
                   <button
                     onClick={() => setIsFeedbackOpen(false)}

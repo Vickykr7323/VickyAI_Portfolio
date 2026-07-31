@@ -1317,7 +1317,7 @@ export default function CSNotes({
                                 )}
                               </div>
                               <p className={`text-[11px] leading-relaxed mt-1 ${styles.textMuted}`}>
-                                Simulate a technical hiring interview with 3 custom multiple-choice placement questions. Pass threshold: 66%.
+                                Test your subject comprehension with 3 custom multiple-choice computer science questions. Pass threshold: 66%.
                               </p>
                             </div>
                           </div>
@@ -1327,7 +1327,7 @@ export default function CSNotes({
                             onClick={() => handleStartQuiz(selectedNote.id)}
                             className="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-4 py-2.5 rounded-lg font-bold flex-shrink-0 transition-all shadow-md active:scale-95"
                           >
-                            {attempt ? "Retake Assessment" : "Test Placement Readiness"}
+                            {attempt ? "Retake Assessment" : "Start Subject Assessment"}
                           </button>
                         </div>
                       );

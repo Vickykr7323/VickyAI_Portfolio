@@ -99,12 +99,10 @@ export default function Experience({ currentTheme }: ExperienceProps) {
 
   const styles = getThemeStyles();
 
-  const getIcon = (type: "teaching" | "placement" | "internship") => {
+  const getIcon = (type: "teaching" | "internship") => {
     switch (type) {
       case "teaching":
         return <GraduationCap className="w-4 h-4" />;
-      case "placement":
-        return <Award className="w-4 h-4" />;
       case "internship":
       default:
         return <Briefcase className="w-4 h-4" />;
@@ -124,7 +122,7 @@ export default function Experience({ currentTheme }: ExperienceProps) {
             Professional Career Timeline
           </h2>
           <p className={`text-sm mt-1 ${styles.textMuted}`}>
-            Explore Vicky's academic teaching, placement department responsibilities, and industry software development internships.
+            Explore Vicky's academic teaching, student mentorship, and industry software development internships.
           </p>
         </div>
 

@@ -24,10 +24,9 @@ const sectionConfig: Record<SectionId, { label: string; icon: React.ComponentTyp
   home: { label: "Home", icon: Home },
   experience: { label: "Career & Experience", icon: Briefcase },
   academics: { label: "Academic Foundation", icon: GraduationCap },
-  projects: { label: "Projects & Research", icon: FolderGit2 },
+  projects: { label: "Projects & Engineering", icon: FolderGit2 },
   skills: { label: "Core Skills", icon: Award },
   notes: { label: "CS Study Notes", icon: Notebook },
-  placement: { label: "Placement Office", icon: UserCheck },
   contact: { label: "Contact Vicky", icon: Mail }
 };
 

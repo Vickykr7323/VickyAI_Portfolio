@@ -740,8 +740,8 @@ export default function ChatbotWidget({ currentTheme }: ChatbotWidgetProps) {
     { label: "📄 Download Resume", query: "How can I download Vicky Kumar's professional resume?" },
     { label: "📞 Contact Information", query: "What are your direct contact details, location, and social media handles?" },
     { label: "🏫 Teaching Experience", query: "What programming subjects do you teach at Gulzar Group of Institutes?" },
-    { label: "🏆 Core Skills", query: "Can you summarize your key skills and IIT certifications?" },
-    { label: "📚 Research Work", query: "Tell me about your research interests and publication papers." },
+    { label: "🏆 Core Skills", query: "Can you summarize your key skills and certifications?" },
+    { label: "📚 Course Notes", query: "Tell me about your computer science study notes and teaching subjects." },
     { label: "🎓 Education", query: "Where did you complete your MCA and BCA degrees?" },
     { label: "🏅 Certifications", query: "What technical certifications have you earned?" },
     { label: "🐙 GitHub", query: "What is your GitHub profile link and open-source activities?" },
@@ -767,7 +767,7 @@ export default function ChatbotWidget({ currentTheme }: ChatbotWidgetProps) {
         {
           id: "welcome-msg",
           role: "model",
-          content: "Hello there! I am Vicky Kumar's AI Academic & Career assistant.\n\nAsk me anything about my MCA/BCA degrees, programming lectures (C, C++, Java, Python, DSA, MERN Stack), research papers, resume critiques, or GGI campus placements!",
+          content: "Hello there! I am Vicky Kumar's AI Academic Assistant.\n\nAsk me anything about my MCA/BCA degrees, programming lectures (C, C++, Java, Python, DSA, MERN Stack), CS study notes, or project guidance!",
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         }
       ]);
@@ -1512,7 +1512,7 @@ export default function ChatbotWidget({ currentTheme }: ChatbotWidgetProps) {
                                       {/* Ask Vicky AI */}
                                       <button
                                         onClick={() => {
-                                          handleSend(`[Career Advice Mode - CS Question Prep]\n\nQuestion: "${q.q}"\n\nProvide an interview blueprint, follow-up queries, key pitfalls to avoid, and GGI placement coordinator advice.`);
+                                          handleSend(`[Academic Advice Mode - CS Question Prep]\n\nQuestion: "${q.q}"\n\nProvide a detailed technical answer, code walkthrough, key pitfalls to avoid, and Professor Vicky's study guidance.`);
                                         }}
                                         className={`py-1 px-2.5 rounded text-[9px] font-bold flex items-center gap-1 transition-all cursor-pointer ${
                                           currentTheme === "developer"
