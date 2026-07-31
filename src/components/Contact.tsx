@@ -787,6 +787,7 @@ ${autoReply}
                 <a 
                   href="https://wa.me/918340223956"
                   target="_blank"
+                  rel="noopener noreferrer"
                   className={`${s.cardClass} hover:scale-103 transition-transform text-center flex flex-col items-center justify-center py-4`}
                   onMouseEnter={() => playAudioCue("nav-hover")}
                 >
@@ -798,6 +799,7 @@ ${autoReply}
                 <a 
                   href="https://calendly.com"
                   target="_blank"
+                  rel="noopener noreferrer"
                   className={`${s.cardClass} hover:scale-103 transition-transform text-center flex flex-col items-center justify-center py-4`}
                   onMouseEnter={() => playAudioCue("nav-hover")}
                 >
@@ -878,7 +880,7 @@ ${autoReply}
                       <a
                         href={`https://wa.me/918340223956?text=${encodeURIComponent(`Hello Sir, my name is ${formData.name}. I submitted an inquiry regarding "${formData.subject}": ${formData.message.slice(0, 100)}...`)}`}
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                         onClick={() => playAudioCue("nav-click")}
                         className="flex-1 px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded font-bold text-[10px] uppercase tracking-wider text-center flex items-center justify-center gap-1.5 transition-all shadow-md text-decoration-none"
                       >
@@ -1496,7 +1498,7 @@ ${autoReply}
                 key={index}
                 href={social.url}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 onMouseEnter={() => playAudioCue("nav-hover")}
                 className={`${s.socialIconClass} group flex items-center gap-2 cursor-pointer`}
                 title={`Open Vicky's ${social.name} profile`}

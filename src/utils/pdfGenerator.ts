@@ -1,17 +1,4 @@
 import { jsPDF } from "jspdf";
-import { 
-  VICKY_INFO, 
-  EXPERIENCES, 
-  EDUCATION, 
-  CERTIFICATIONS, 
-  PROJECTS, 
-  ACADEMIC_STRENGTHS, 
-  RESEARCH_INTERESTS, 
-  PUBLICATIONS, 
-  PATENTS, 
-  CONFERENCES, 
-  WORKSHOPS_FDPS 
-} from "../data";
 
 export function generatePortfolioPdf() {
   const doc = new jsPDF({
@@ -22,80 +9,54 @@ export function generatePortfolioPdf() {
 
   const pageWidth = doc.internal.pageSize.getWidth(); // 210 mm
   const pageHeight = doc.internal.pageSize.getHeight(); // 297 mm
-  const marginX = 15;
-  const contentWidth = pageWidth - (marginX * 2); // 180 mm
-  let y = 15;
+  const marginX = 18;
+  const contentWidth = pageWidth - (marginX * 2); // 174 mm
+  let y = 18;
   let pageNum = 1;
 
-  // Professional Color Palette (Deep Navy slate style)
+  // Colors
   const colors = {
-    primary: [15, 23, 42],       // Slate-900 (Deepest dark)
-    secondary: [71, 85, 105],    // Slate-600 (Subtitles/secondary)
-    accent: [26, 54, 93],        // Professional Navy Blue
-    neutralDark: [51, 65, 85],   // Slate-700 (Body text)
-    neutralLight: [226, 232, 240], // Slate-200 (Lines/Dividers)
-    accentLight: [239, 246, 255]  // Blue-50 (Optional highlight backgrounds)
+    primary: [0, 0, 0],
+    secondary: [30, 30, 30],
+    accent: [0, 80, 180],
+    darkText: [20, 20, 20],
   };
 
-  // Helper to draw a clean footer on every page
   const drawFooter = () => {
     doc.setFont("Helvetica", "normal");
     doc.setFontSize(8);
-    doc.setTextColor(148, 163, 184); // Slate-400
-    doc.setDrawColor(226, 232, 240);
-    doc.setLineWidth(0.25);
-    doc.line(marginX, pageHeight - 12, pageWidth - marginX, pageHeight - 12);
-    doc.text("Academic Curriculum Vitae  |  Prof. Vicky Kumar", marginX, pageHeight - 8);
-    doc.text(`Page ${pageNum}`, pageWidth - marginX - 12, pageHeight - 8);
+    doc.setTextColor(120, 120, 120);
+    doc.text("Vicky Kumar — Resume", marginX, pageHeight - 8);
+    doc.text(`Page ${pageNum}`, pageWidth - marginX - 10, pageHeight - 8);
   };
 
-  // Helper to draw the persistent header on later pages
-  const drawPageHeader = () => {
-    doc.setFont("Helvetica", "oblique");
-    doc.setFontSize(8);
-    doc.setTextColor(115, 115, 115);
-    doc.text(`${VICKY_INFO.name} — Computer Science Educator & Placement Advisor`, marginX, 10);
-    doc.setDrawColor(226, 232, 240);
-    doc.setLineWidth(0.2);
-    doc.line(marginX, 12, pageWidth - marginX, 12);
-  };
-
-  // Helper to check for page overflow and insert a page break
   const checkPageOverflow = (heightNeeded: number) => {
-    if (y + heightNeeded > pageHeight - 16) {
+    if (y + heightNeeded > pageHeight - 14) {
       drawFooter();
       doc.addPage();
       pageNum++;
       y = 18;
-      drawPageHeader();
     }
   };
 
-  // Helper to render section headers nicely
   const drawSectionHeader = (title: string) => {
-    checkPageOverflow(16);
-    y += 4;
-    doc.setFont("Helvetica", "bold");
-    doc.setFontSize(11);
-    doc.setTextColor(colors.accent[0], colors.accent[1], colors.accent[2]);
-    doc.text(title.toUpperCase(), marginX, y);
+    checkPageOverflow(12);
     y += 2;
-    
-    doc.setDrawColor(colors.accent[0], colors.accent[1], colors.accent[2]);
-    doc.setLineWidth(0.5);
-    doc.line(marginX, y, pageWidth - marginX, y); // Solid clean underline across content width
-    y += 5.5;
+    doc.setFont("Helvetica", "bold");
+    doc.setFontSize(10.5);
+    doc.setTextColor(colors.primary[0], colors.primary[1], colors.primary[2]);
+    doc.text(title.toUpperCase(), marginX, y);
+    y += 3;
   };
 
-  // Helper to wrap and print bullet points safely with proper indent alignment
   const printBullet = (text: string) => {
     doc.setFont("Helvetica", "normal");
-    doc.setFontSize(8.5);
-    doc.setTextColor(colors.neutralDark[0], colors.neutralDark[1], colors.neutralDark[2]);
-    
-    const bulletTextWidth = contentWidth - 6; // slightly narrower to fit bullet indent
+    doc.setFontSize(9.5);
+    doc.setTextColor(colors.darkText[0], colors.darkText[1], colors.darkText[2]);
+
+    const bulletTextWidth = contentWidth - 6;
     const lines = doc.splitTextToSize(text, bulletTextWidth);
-    
+
     lines.forEach((line: string, index: number) => {
       checkPageOverflow(4.5);
       if (index === 0) {
@@ -104,56 +65,43 @@ export function generatePortfolioPdf() {
       } else {
         doc.text(line, marginX + 6, y);
       }
-      y += 4;
+      y += 4.5;
     });
   };
 
-  // ================= HEADLINE HEADER =================
-
-  // Name
+  // Header
   doc.setFont("Helvetica", "bold");
-  doc.setFontSize(22);
+  doc.setFontSize(16);
   doc.setTextColor(colors.primary[0], colors.primary[1], colors.primary[2]);
-  doc.text(VICKY_INFO.name, marginX, y);
-  y += 7.5;
-
-  // Title / Sub-header
-  doc.setFont("Helvetica", "bold");
-  doc.setFontSize(11);
-  doc.setTextColor(colors.secondary[0], colors.secondary[1], colors.secondary[2]);
-  doc.text(VICKY_INFO.title.toUpperCase(), marginX, y);
+  doc.text("VICKY KUMAR", marginX, y);
   y += 6;
 
-  // Contact Info Grid
+  doc.setFont("Helvetica", "bold");
+  doc.setFontSize(10.5);
+  doc.setTextColor(colors.secondary[0], colors.secondary[1], colors.secondary[2]);
+  doc.text("Assistant Professor – Computer Science", marginX, y);
+  y += 5;
+
   doc.setFont("Helvetica", "normal");
-  doc.setFontSize(8.5);
-  doc.setTextColor(colors.neutralDark[0], colors.neutralDark[1], colors.neutralDark[2]);
-  
-  const contactRow1 = [
-    `Email: ${VICKY_INFO.email}`,
-    `Phone: +91 ${VICKY_INFO.phone}`,
-    `Location: ${VICKY_INFO.location}`
-  ];
-  doc.text(contactRow1.join("  |  "), marginX, y);
+  doc.setFontSize(9.5);
+  doc.setTextColor(colors.darkText[0], colors.darkText[1], colors.darkText[2]);
+  doc.text("Delhi, India  |   8340223956", marginX, y);
   y += 4.5;
 
-  const cleanLinkedIn = VICKY_INFO.linkedin.replace("https://www.", "").replace("https://", "").replace(/\/$/, "");
-  const cleanGitHub = VICKY_INFO.github.replace("https://www.", "").replace("https://", "").replace("https://github.com/", "github.com/").replace(/\/$/, "");
+  doc.setTextColor(0, 80, 180);
+  doc.text("LinkedIn: https://www.linkedin.com/in/vicky-kumar-600059219/", marginX, y);
+  y += 4.5;
 
-  const contactRow2 = [
-    `LinkedIn: ${cleanLinkedIn}`,
-    `GitHub: ${cleanGitHub}`
-  ];
-  doc.text(contactRow2.join("  |  "), marginX, y);
-  y += 6.5;
+  doc.text("GitHub: https://github.com/Vickykr7323", marginX, y);
+  y += 6;
 
-  // ================= SUMMARY =================
-  drawSectionHeader("Professional Summary");
+  // PROFESSIONAL SUMMARY
+  drawSectionHeader("PROFESSIONAL SUMMARY");
   doc.setFont("Helvetica", "normal");
-  doc.setFontSize(9);
-  doc.setTextColor(colors.neutralDark[0], colors.neutralDark[1], colors.neutralDark[2]);
-  
-  const summaryLines = doc.splitTextToSize(VICKY_INFO.summary, contentWidth);
+  doc.setFontSize(9.5);
+  doc.setTextColor(colors.darkText[0], colors.darkText[1], colors.darkText[2]);
+  const summaryText = "Dedicated Assistant Professor in Computer Science with expertise in Programming, Data Structures, and Core Computer Science subjects. Experienced in Outcome-Based Education (OBE), curriculum design, laboratory instruction, and academic mentoring. Skilled in integrating industry-aligned technologies and research-driven learning methodologies to enhance student engagement and employability.";
+  const summaryLines = doc.splitTextToSize(summaryText, contentWidth);
   summaryLines.forEach((line: string) => {
     checkPageOverflow(4.5);
     doc.text(line, marginX, y);
@@ -161,245 +109,201 @@ export function generatePortfolioPdf() {
   });
   y += 2;
 
-  // ================= EDUCATION =================
-  drawSectionHeader("Academic Qualifications");
-  EDUCATION.forEach((edu) => {
-    checkPageOverflow(15);
-    
-    // Degree Name
-    doc.setFont("Helvetica", "bold");
-    doc.setFontSize(9.5);
-    doc.setTextColor(colors.primary[0], colors.primary[1], colors.primary[2]);
-    doc.text(edu.degree, marginX, y);
+  // TEACHING EXPERIENCE
+  drawSectionHeader("TEACHING EXPERIENCE");
+  checkPageOverflow(12);
+  doc.setFont("Helvetica", "bold");
+  doc.setFontSize(10);
+  doc.setTextColor(colors.primary[0], colors.primary[1], colors.primary[2]);
+  doc.text("Assistant Professor – Computer Science", marginX, y);
+  y += 4.5;
 
-    // Period (Right-aligned)
-    doc.setFont("Helvetica", "bold");
-    doc.setFontSize(9);
-    doc.setTextColor(colors.secondary[0], colors.secondary[1], colors.secondary[2]);
-    const periodWidth = doc.getTextWidth(edu.period);
-    doc.text(edu.period, pageWidth - marginX - periodWidth, y);
-    y += 4.5;
+  doc.setFont("Helvetica", "normal");
+  doc.setFontSize(9.5);
+  doc.text("Aug 2025 – Present", marginX, y);
+  y += 5;
 
-    // Institution
-    doc.setFont("Helvetica", "oblique");
-    doc.setFontSize(9);
-    doc.setTextColor(colors.accent[0], colors.accent[1], colors.accent[2]);
-    doc.text(edu.institution, marginX, y);
-    y += 4.5;
+  doc.setFont("Helvetica", "bold");
+  doc.setFontSize(9.5);
+  doc.text("Subjects: C, C++, Java, Python, Data Structures", marginX, y);
+  y += 5;
 
-    // Specialization Details
-    if (edu.details) {
-      doc.setFont("Helvetica", "normal");
-      doc.setFontSize(8.5);
-      doc.setTextColor(colors.neutralDark[0], colors.neutralDark[1], colors.neutralDark[2]);
-      const detailLines = doc.splitTextToSize(edu.details, contentWidth);
-      detailLines.forEach((line: string) => {
-        checkPageOverflow(4.2);
-        doc.text(line, marginX, y);
-        y += 4;
-      });
-    }
-    y += 3;
-  });
+  const teachingBullets = [
+    "Designed and delivered undergraduate curriculum aligned with OBE standards",
+    "Conducted lectures, tutorials, and hands-on laboratory sessions",
+    "Prepared question papers, assignments, and structured evaluation rubrics",
+    "Mentored mini and major academic projects",
+    "Guided students for internships and placement preparation",
+    "Promoted experiential, project-based, and outcome-focused learning"
+  ];
+  teachingBullets.forEach(bullet => printBullet(bullet));
+  y += 2;
 
-  // ================= EXPERIENCE =================
-  drawSectionHeader("Professional & Teaching Experience");
+  // EDUCATION
+  drawSectionHeader("EDUCATION");
   
-  EXPERIENCES.forEach((exp) => {
-    checkPageOverflow(18);
-    
-    // Role Title
+  // MCA
+  checkPageOverflow(10);
+  doc.setFont("Helvetica", "bold");
+  doc.setFontSize(10);
+  doc.setTextColor(colors.primary[0], colors.primary[1], colors.primary[2]);
+  doc.text("Master of Computer Applications (MCA)", marginX, y);
+  y += 4.5;
+  doc.setFont("Helvetica", "normal");
+  doc.setFontSize(9.5);
+  doc.text("Teerthanker Mahaveer University | 2023 – 2025", marginX, y);
+  y += 5.5;
+
+  // BCA
+  checkPageOverflow(10);
+  doc.setFont("Helvetica", "bold");
+  doc.setFontSize(10);
+  doc.text("Bachelor of Computer Applications (BCA)", marginX, y);
+  y += 4.5;
+  doc.setFont("Helvetica", "normal");
+  doc.setFontSize(9.5);
+  doc.text("Maharaja College | 2019 – 2022", marginX, y);
+  y += 5;
+
+  // TECHNICAL COMPETENCIES
+  drawSectionHeader("TECHNICAL COMPETENCIES");
+  const competencies = [
+    { label: "Programming Languages", val: "C, C++, Java, Python" },
+    { label: "Core Subjects", val: "Data Structures, OOP, DBMS, Operating Systems" },
+    { label: "Web Technologies", val: "MERN Stack, MEAN Stack, REST APIs, HTML, CSS, JavaScript" },
+    { label: "Databases", val: "MySQL, MongoDB" },
+    { label: "Tools", val: "Git, GitHub, VS Code" }
+  ];
+
+  competencies.forEach(comp => {
+    checkPageOverflow(5);
     doc.setFont("Helvetica", "bold");
     doc.setFontSize(9.5);
     doc.setTextColor(colors.primary[0], colors.primary[1], colors.primary[2]);
-    doc.text(exp.role, marginX, y);
+    const labelStr = `${comp.label}: `;
+    doc.text(labelStr, marginX, y);
+    const labelWidth = doc.getTextWidth(labelStr);
 
-    // Period (Right-aligned)
-    doc.setFont("Helvetica", "bold");
-    doc.setFontSize(9);
-    doc.setTextColor(colors.secondary[0], colors.secondary[1], colors.secondary[2]);
-    const periodWidth = doc.getTextWidth(exp.period);
-    doc.text(exp.period, pageWidth - marginX - periodWidth, y);
-    y += 4.5;
-
-    // Organization
-    doc.setFont("Helvetica", "bold");
-    doc.setFontSize(9);
-    doc.setTextColor(colors.accent[0], colors.accent[1], colors.accent[2]);
-    doc.text(exp.organization, marginX, y);
-    y += 4.5;
-
-    // Role Description
     doc.setFont("Helvetica", "normal");
-    doc.setFontSize(8.5);
-    doc.setTextColor(colors.neutralDark[0], colors.neutralDark[1], colors.neutralDark[2]);
-    const descLines = doc.splitTextToSize(exp.description, contentWidth);
-    descLines.forEach((line: string) => {
-      checkPageOverflow(4);
-      doc.text(line, marginX, y);
-      y += 4;
+    const valLines = doc.splitTextToSize(comp.val, contentWidth - labelWidth);
+    valLines.forEach((line: string, i: number) => {
+      if (i === 0) {
+        doc.text(line, marginX + labelWidth, y);
+      } else {
+        y += 4.5;
+        checkPageOverflow(4.5);
+        doc.text(line, marginX + 10, y);
+      }
     });
-    y += 1.5;
-
-    // Key Highlights Bullet list
-    exp.highlights.forEach((highlight) => {
-      printBullet(highlight);
-    });
-    y += 2;
+    y += 4.5;
   });
+  y += 1;
 
-  // ================= PROJECTS =================
-  drawSectionHeader("Key Technical Projects & Implementations");
+  // ACADEMIC PROJECTS
+  drawSectionHeader("ACADEMIC PROJECTS");
 
-  // Loop over all main projects to keep it completely professional
-  PROJECTS.forEach((proj) => {
-    checkPageOverflow(20);
-    
-    // Project Title
-    doc.setFont("Helvetica", "bold");
-    doc.setFontSize(9.5);
-    doc.setTextColor(colors.primary[0], colors.primary[1], colors.primary[2]);
-    doc.text(proj.title, marginX, y);
-
-    // Subtitle / Sub-specialty (Right-aligned)
-    doc.setFont("Helvetica", "normal");
-    doc.setFontSize(8.5);
-    doc.setTextColor(colors.secondary[0], colors.secondary[1], colors.secondary[2]);
-    const subWidth = doc.getTextWidth(proj.subtitle);
-    doc.text(proj.subtitle, pageWidth - marginX - subWidth, y);
-    y += 4.5;
-
-    // Technologies Used
-    doc.setFont("Helvetica", "bold");
-    doc.setFontSize(8);
-    doc.setTextColor(colors.accent[0], colors.accent[1], colors.accent[2]);
-    doc.text(`Tech Stack: ${proj.tech.join(", ")}`, marginX, y);
-    y += 4.5;
-
-    // Project Description text
-    doc.setFont("Helvetica", "normal");
-    doc.setFontSize(8.5);
-    doc.setTextColor(colors.neutralDark[0], colors.neutralDark[1], colors.neutralDark[2]);
-    const descLines = doc.splitTextToSize(proj.description, contentWidth);
-    descLines.forEach((line: string) => {
-      checkPageOverflow(4);
-      doc.text(line, marginX, y);
-      y += 4;
-    });
-    y += 1.5;
-
-    // Core Features Bullets
-    proj.features.forEach((feature) => {
-      printBullet(feature);
-    });
-    y += 2;
-  });
-
-  // ================= SKILLS & RESEARCH =================
-  drawSectionHeader("Syllabus Competencies & Research Focus");
-
-  checkPageOverflow(20);
+  // Project 1
+  checkPageOverflow(10);
   doc.setFont("Helvetica", "bold");
-  doc.setFontSize(9);
+  doc.setFontSize(10);
   doc.setTextColor(colors.primary[0], colors.primary[1], colors.primary[2]);
-  doc.text("Pedagogical Core & Academic Strengths:", marginX, y);
+  doc.text("AI-Based Job Portal (MERN Stack)", marginX, y);
   y += 4.5;
 
-  doc.setFont("Helvetica", "normal");
-  doc.setFontSize(8.5);
-  doc.setTextColor(colors.neutralDark[0], colors.neutralDark[1], colors.neutralDark[2]);
-  const strengthsLines = doc.splitTextToSize(ACADEMIC_STRENGTHS.join("  •  "), contentWidth);
-  strengthsLines.forEach((line: string) => {
-    checkPageOverflow(4);
-    doc.text(line, marginX, y);
-    y += 4;
-  });
-  y += 2.5;
+  const proj1Bullets = [
+    "Developed full-stack job portal with Job Seeker, Employer, and Admin modules",
+    "Implemented AI-based job recommendation system",
+    "Designed scalable architecture with secure authentication"
+  ];
+  proj1Bullets.forEach(b => printBullet(b));
+  y += 2;
 
-  checkPageOverflow(20);
+  // Project 2
+  checkPageOverflow(10);
   doc.setFont("Helvetica", "bold");
-  doc.setFontSize(9);
-  doc.setTextColor(colors.primary[0], colors.primary[1], colors.primary[2]);
-  doc.text("Active Research & Specializations:", marginX, y);
+  doc.setFontSize(10);
+  doc.text("Academic Portfolio Website", marginX, y);
   y += 4.5;
 
+  const proj2Bullets = [
+    "Built responsive academic portfolio website",
+    "Implemented modern UI/UX principles for professional presentation"
+  ];
+  proj2Bullets.forEach(b => printBullet(b));
+  y += 2;
+
+  // INTERNSHIPS
+  drawSectionHeader("INTERNSHIPS");
+
+  // Internship 1
+  checkPageOverflow(10);
+  doc.setFont("Helvetica", "bold");
+  doc.setFontSize(10);
+  doc.setTextColor(colors.primary[0], colors.primary[1], colors.primary[2]);
+  doc.text("MERN Stack Intern – Intellipaat (6 Months)", marginX, y);
+  y += 4.5;
+
+  const intern1Bullets = [
+    "Developed web applications and RESTful APIs",
+    "Implemented authentication and database integration"
+  ];
+  intern1Bullets.forEach(b => printBullet(b));
+  y += 2;
+
+  // Internship 2
+  checkPageOverflow(10);
+  doc.setFont("Helvetica", "bold");
+  doc.setFontSize(10);
+  doc.text("MERN Stack Intern – Cromacampus, Noida", marginX, y);
+  y += 4.5;
+
+  const intern2Bullets = [
+    "Trained in full-stack development and backend connectivity"
+  ];
+  intern2Bullets.forEach(b => printBullet(b));
+  y += 2;
+
+  // CERTIFICATIONS
+  drawSectionHeader("CERTIFICATIONS");
+  checkPageOverflow(10);
   doc.setFont("Helvetica", "normal");
-  doc.setFontSize(8.5);
-  doc.setTextColor(colors.neutralDark[0], colors.neutralDark[1], colors.neutralDark[2]);
-  const researchLines = doc.splitTextToSize(RESEARCH_INTERESTS.join("  •  "), contentWidth);
+  doc.setFontSize(9.5);
+  doc.setTextColor(colors.darkText[0], colors.darkText[1], colors.darkText[2]);
+  doc.text("Python – IIT Bombay        Java – IIT Bombay", marginX, y);
+  y += 4.5;
+  doc.text("MERN Stack – Intellipaat   MEAN Stack – Intellipaat", marginX, y);
+  y += 5.5;
+
+  // RESEARCH INTERESTS
+  drawSectionHeader("RESEARCH INTERESTS");
+  checkPageOverflow(6);
+  doc.setFont("Helvetica", "normal");
+  doc.setFontSize(9.5);
+  doc.setTextColor(colors.darkText[0], colors.darkText[1], colors.darkText[2]);
+  const researchText = "Artificial Intelligence | Machine Learning | Data Science | Educational Technology | Scalable Web Systems";
+  const researchLines = doc.splitTextToSize(researchText, contentWidth);
   researchLines.forEach((line: string) => {
-    checkPageOverflow(4);
+    checkPageOverflow(4.5);
     doc.text(line, marginX, y);
-    y += 4;
+    y += 4.5;
   });
   y += 2;
 
-  // ================= CERTIFICATIONS =================
-  drawSectionHeader("IIT & Industry Certifications");
-  
-  checkPageOverflow(15);
-  const formattedCerts = CERTIFICATIONS.map((c) => `${c.name} (${c.provider})`);
-  formattedCerts.forEach((cert) => {
-    printBullet(cert);
-  });
-  y += 2;
-
-  // ================= SCHOLARLY WORKS & PATENTS =================
-  drawSectionHeader("Scholarly Publications & Patents");
-
-  // Journal Paper
-  checkPageOverflow(12);
-  doc.setFont("Helvetica", "bold");
-  doc.setFontSize(9);
-  doc.setTextColor(colors.accent[0], colors.accent[1], colors.accent[2]);
-  doc.text("Peer-Reviewed Journal Papers:", marginX, y);
-  y += 4.5;
-
-  PUBLICATIONS.forEach((pub) => {
-    const pubText = `"${pub.title}" — Published in ${pub.journal} (Year: ${pub.year}). Author: ${pub.author}`;
-    printBullet(pubText);
-  });
-  y += 2;
-
-  // Patent
-  checkPageOverflow(12);
-  doc.setFont("Helvetica", "bold");
-  doc.setFontSize(9);
-  doc.setTextColor(colors.accent[0], colors.accent[1], colors.accent[2]);
-  doc.text("Intellectual Property Patents:", marginX, y);
-  y += 4.5;
-
-  PATENTS.forEach((pat) => {
-    const patText = `"${pat.title}" — Reg No: ${pat.regNo} (Status: ${pat.status}, Published: ${pat.year})`;
-    printBullet(patText);
-  });
-  y += 2;
-
-  // Conferences (Brand new properly added section)
-  checkPageOverflow(12);
-  doc.setFont("Helvetica", "bold");
-  doc.setFontSize(9);
-  doc.setTextColor(colors.accent[0], colors.accent[1], colors.accent[2]);
-  doc.text("International IEEE & ACM Conferences:", marginX, y);
-  y += 4.5;
-
-  CONFERENCES.forEach((conf) => {
-    const confText = `"${conf.title}" — Presented at ${conf.venue} (${conf.year})`;
-    printBullet(confText);
-  });
-  y += 2;
-
-  // ================= WORKSHOPS & FDPS =================
-  drawSectionHeader("Workshops & Faculty Development Programmes");
-
-  WORKSHOPS_FDPS.forEach((wf) => {
-    const wfText = `"${wf.name}" [${wf.type}] — Organized by ${wf.organizer} (Duration: ${wf.duration}, Year: ${wf.year})`;
-    printBullet(wfText);
+  // ACADEMIC STRENGTHS
+  drawSectionHeader("ACADEMIC STRENGTHS");
+  checkPageOverflow(6);
+  doc.setFont("Helvetica", "normal");
+  doc.setFontSize(9.5);
+  doc.setTextColor(colors.darkText[0], colors.darkText[1], colors.darkText[2]);
+  const strengthsText = "Curriculum Planning | Academic Mentorship | Classroom Management | Research Orientation | Technical Communication";
+  const strengthsLines = doc.splitTextToSize(strengthsText, contentWidth);
+  strengthsLines.forEach((line: string) => {
+    checkPageOverflow(4.5);
+    doc.text(line, marginX, y);
+    y += 4.5;
   });
 
-  // Render final footer on the last page
   drawFooter();
-
-  // Trigger PDF file saving inside the client browser
-  doc.save("Vicky_Kumar_Academic_CV.pdf");
+  doc.save("Vicky_Kumar_Resume.pdf");
 }
+

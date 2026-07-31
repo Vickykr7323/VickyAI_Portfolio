@@ -11,13 +11,13 @@ const profStartYear = currentMonth >= 7 ? currentYear - 1 : currentYear - 2;
 
 export const VICKY_INFO = {
   name: "VICKY KUMAR",
-  title: "Assistant Professor & Placement Department Member",
-  location: "Delhi / Ludhiana, India",
+  title: "Assistant Professor – Computer Science",
+  location: "Delhi, India",
   phone: "8340223956",
   email: "vickykr802302@gmail.com",
   linkedin: "https://www.linkedin.com/in/vicky-kumar-600059219/",
   github: "https://github.com/Vickykr7323",
-  summary: "Dedicated Assistant Professor of Computer Science and Placement Advisor at Gulzar Group of Institutes, specializing in Programming (C, C++, Java, Python), Data Structures, and Database Management. Published Patent Holder in AI-driven smart outcome assessments and scholarly author in Outcome-Based Education (OBE). Combining elite certifications from IIT Bombay and NPTEL with deep hands-on industry expertise to deliver high-impact student mentoring, career coaching, resume optimization, and mock interview bootcamps leading to 150+ successful placements in premier IT enterprises."
+  summary: "Dedicated Assistant Professor in Computer Science with expertise in Programming, Data Structures, and Core Computer Science subjects. Experienced in Outcome-Based Education (OBE), curriculum design, laboratory instruction, and academic mentoring. Skilled in integrating industry-aligned technologies and research-driven learning methodologies to enhance student engagement and employability."
 };
 
 export const EXPERIENCES: ExperienceItem[] = [
